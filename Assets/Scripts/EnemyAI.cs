@@ -23,7 +23,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Awake()
     {
-        player = GameObject.Find("Player").transform;
+        player = GameObject.Find("PlayerPrefab").transform;
         agent = GetComponent<NavMeshAgent>();
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class PlayerController : MonoBehaviour
 
     Vector2 currentMouseDelta = Vector2.zero;
     Vector2 currentMouseDeltaVelocity = Vector2.zero;
+
+    private Vector2 targetDir;
 
     void Start()
     {
@@ -59,9 +62,9 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    void UpdateMovement()
+    public void UpdateMovement()
     {
-        Vector2 targetDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        
         targetDir.Normalize();
 
         currentDir = Vector2.SmoothDamp(currentDir, targetDir, ref currentDirVelocity, moveSmoothTime);
@@ -84,5 +87,13 @@ public class PlayerController : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime);
         velocityY += gravity * Time.deltaTime;
+    }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        Vector2 movement = context.ReadValue<Vector2>();
+        targetDir = new Vector2(movement.x, movement.y);
+
+
     }
 }
