@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6333571306966793137}
   - component: {fileID: 6333571306966793136}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 6333571307077586199}
   - component: {fileID: 6333571307077586198}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: Grip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -171,10 +171,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6333571307936869830}
+  - component: {fileID: 8680952156487660114}
   - component: {fileID: 6333571307936869832}
   - component: {fileID: 6994156205451653968}
   - component: {fileID: 4021651822211362703}
-  - component: {fileID: 8680952156487660114}
   - component: {fileID: 3835860664888547762}
   m_Layer: 0
   m_Name: Gun
@@ -200,6 +200,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8680952156487660114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6333571307936869829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52725146b81b0fc43846be39cdd78230, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  range: 100
+  muzzleflash: {fileID: 6333571308691518614}
+  bulletHoleGraphic: {fileID: 3725509879874758902, guid: f66ecb6e03b9e1249a281fe661de6ffa, type: 3}
+  isFiring: 0
+  selfPrefab: {fileID: 6333571307936869829}
+  prefabName: Prefabs/Gun
 --- !u!82 &6333571307936869832
 AudioSource:
   m_ObjectHideFlags: 0
@@ -212,7 +231,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 3c83ed84a00bcf44aa2b825da2dc4650, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.25
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -322,25 +341,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.068565786, y: 0.08476162, z: 0.36130235}
   m_Center: {x: -0.0010235608, y: 0.05136919, z: 0.13510908}
---- !u!114 &8680952156487660114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6333571307936869829}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52725146b81b0fc43846be39cdd78230, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
-  range: 100
-  muzzleflash: {fileID: 6333571308691518614}
-  bulletHoleGraphic: {fileID: 3725509879874758902, guid: f66ecb6e03b9e1249a281fe661de6ffa, type: 3}
-  isFiring: 0
-  selfPrefab: {fileID: 6333571307936869829}
-  prefabName: Prefabs/Gun
 --- !u!54 &3835860664888547762
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -370,7 +370,7 @@ GameObject:
   - component: {fileID: 6333571308569988008}
   - component: {fileID: 6333571308569988007}
   m_Layer: 0
-  m_Name: Boom
+  m_Name: Graphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -463,12 +463,12 @@ GameObject:
   m_Component:
   - component: {fileID: 6333571308691518615}
   m_Layer: 0
-  m_Name: muzzel flash
+  m_Name: muzzleFlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6333571308691518615
 Transform:
   m_ObjectHideFlags: 0
@@ -476,8 +476,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6333571308691518614}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.084, z: 0.334}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.0466, z: 0.322}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6333571308569988006}
@@ -496,7 +496,7 @@ GameObject:
   - component: {fileID: 6333571308989772659}
   - component: {fileID: 6333571308989772660}
   m_Layer: 0
-  m_Name: Boom light
+  m_Name: Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
