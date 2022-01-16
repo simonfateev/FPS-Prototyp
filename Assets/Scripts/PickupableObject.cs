@@ -2,15 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickupableObject : MonoBehaviour
-
-
+public interface IPickupableObject
 {
-    public void OnPickup()
-    {
-        Debug.Log("I have been touched");
-    
-
-    }
-    
+    void OnPickUp(PlayerScript byPlayer);
 }

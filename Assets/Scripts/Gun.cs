@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class Gun : MonoBehaviour, IPickupableObject
 {
 
     public float damage = 10f;
@@ -10,17 +10,22 @@ public class Gun : MonoBehaviour
     public GameObject muzzleflash;
     public GameObject bulletHoleGraphic;
     public bool isFiring;
-    
+
+    public GameObject selfPrefab;
+    public string prefabName;
 
     private Camera cam;
     private AudioSource gunsound;
+    private Rigidbody rb;
 
-    void Start()
+    void Awake()
     {
         isFiring = false;
         cam = Camera.main;
         muzzleflash.SetActive(false);
         gunsound = GetComponent<AudioSource>();
+        rb = GetComponent<Rigidbody>();
+        selfPrefab = Resources.Load(prefabName) as GameObject;
     }
 
     void Update() 
@@ -31,6 +36,10 @@ public class Gun : MonoBehaviour
             muzzleflash.SetActive(false); 
         }
     }
+
+    public void SetAttachedToPlayer(PlayerScript playerScript) {
+        rb.isKinematic = true;
+	}
 
     public void Shoot()
     {
@@ -53,4 +62,9 @@ public class Gun : MonoBehaviour
         Instantiate(bulletHoleGraphic, hit.point, Quaternion.Euler(90, 180, 0));
 
     }
+
+	public void OnPickUp(PlayerScript byPlayer)
+	{
+        Debug.Log("Gun script got picked up");
+	}
 }
