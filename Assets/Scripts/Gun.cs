@@ -2,17 +2,17 @@
 using UnityEngine;
 using TMPro;
 
-public class Gun : MonoBehaviour
+public class Gun : MonoBehaviour, IPickupableObject
 {
     //Gun stats
     public int damage;
     public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
     public int magazineSize, bulletsPerTap;
     public bool allowButtonHold;
-    int bulletsLeft, bulletsShot;
+    public int bulletsLeft, bulletsShot;
 
     //bools 
-    bool shooting, readyToShoot, reloading;
+    public bool shooting, readyToShoot, reloading;
 
     //Reference
     public Transform attackPoint;
@@ -40,27 +40,14 @@ public class Gun : MonoBehaviour
     }
     private void Update()
     {
-        MyInput();
         AmmunitionText.SetText(bulletsLeft + " / " + magazineSize);
     }
     public void SetAttachedToPlayer(PlayerScript playerScript)
     {
         rb.isKinematic = true;
     }
-    private void MyInput()
-    {
-        if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
-        else shooting = Input.GetKeyDown(KeyCode.Mouse0);
-
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading) Reload();
-
-        //Shoot
-        if (readyToShoot && shooting && !reloading && bulletsLeft > 0){
-            bulletsShot = bulletsPerTap;
-            Shoot();
-        }
-    }
-    private void Shoot()
+   
+    public void Shoot()
     {
         readyToShoot = false;
 
@@ -104,7 +91,7 @@ public class Gun : MonoBehaviour
     {
         readyToShoot = true;
     }
-    private void Reload()
+    public void Reload()
     {
         reloading = true;
         Invoke("ReloadFinished", reloadTime);
@@ -113,5 +100,9 @@ public class Gun : MonoBehaviour
     {
         bulletsLeft = magazineSize;
         reloading = false;
+    }
+    public void OnPickUp(PlayerScript byPlayer)
+    {
+        Debug.Log("Gun script got picked up");
     }
 }

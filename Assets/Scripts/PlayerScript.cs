@@ -17,6 +17,8 @@ public class PlayerScript : MonoBehaviour
     public Transform gunAttachPointLeft;
     public Transform gunAttachPointRight;
     public Transform gunDropPoint;
+    public Gun gun;
+    public bool shooting;
 
     public Camera cam;
 
@@ -43,29 +45,36 @@ public class PlayerScript : MonoBehaviour
             AttemptPickup();
         }
 
-        //if (Input.GetButtonDown("Fire1"))
-        //{
-        //    playerGuns[Side.RIGHT].isFiring = true;
-        //    playerGuns[Side.RIGHT].Shoot();
-        //}
-
-        //if (Input.GetButtonUp("Fire1"))
-        //{
-        //    playerGuns[Side.RIGHT].isFiring = false;
-        //}
-
-        //if (Input.GetButtonDown("Fire2"))
-        //{
-        //    playerGuns[Side.LEFT].isFiring = true;
-        //    playerGuns[Side.LEFT].Shoot();
-        //}
-
-        //if (Input.GetButtonUp("Fire2"))
-        //{
-        //    playerGuns[Side.LEFT].isFiring = false;
-        //}
+        MyInput();
     }
 
+    public void MyInput()
+    {
+        // Right side gun input code this was ass to write
+        if (playerGuns[Side.RIGHT].allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
+        else shooting = Input.GetKeyDown(KeyCode.Mouse0);
+        if (playerGuns[Side.RIGHT].readyToShoot && shooting && !playerGuns[Side.RIGHT].reloading && playerGuns[Side.RIGHT].bulletsLeft > 0)
+        {
+            playerGuns[Side.RIGHT].bulletsShot = playerGuns[Side.RIGHT].bulletsPerTap;
+            playerGuns[Side.RIGHT].Shoot();
+        }
+
+        // Left side gun input code this was equally bad
+        if (playerGuns[Side.LEFT].allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse1);
+        else shooting = Input.GetKeyDown(KeyCode.Mouse1);
+        if (playerGuns[Side.LEFT].readyToShoot && shooting && !playerGuns[Side.LEFT].reloading && playerGuns[Side.LEFT].bulletsLeft > 0)
+        {
+            playerGuns[Side.LEFT].bulletsShot = playerGuns[Side.LEFT].bulletsPerTap;
+            playerGuns[Side.LEFT].Shoot();
+        }
+
+        // Reload input code
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            playerGuns[Side.LEFT].Reload();
+            playerGuns[Side.RIGHT].Reload();
+        }
+    }
     void AttemptPickup()
     {
         RaycastHit hit;

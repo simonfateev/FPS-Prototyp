@@ -379,6 +379,7 @@ MonoBehaviour:
   gunAttachPointLeft: {fileID: 2760381819775411185}
   gunAttachPointRight: {fileID: 2760381819212680262}
   gunDropPoint: {fileID: 7064331149626746893}
+  gun: {fileID: -454712544410159954, guid: e5c40a40bb651f1498021efb82303b01, type: 3}
   cam: {fileID: 2760381820294819095}
 --- !u!1 &2760381819212680261
 GameObject:
@@ -552,7 +553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHead: {fileID: 6079475032921801819}
-  PlayerPrefab: {fileID: 2760381819199848762}
+  Player: {fileID: 0}
   Cam: {fileID: 2760381820294819095}
 --- !u!1 &6144168609969477915
 GameObject:

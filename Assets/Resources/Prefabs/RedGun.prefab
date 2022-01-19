@@ -174,8 +174,8 @@ GameObject:
   - component: {fileID: 6333571307936869832}
   - component: {fileID: 6994156205451653968}
   - component: {fileID: 4021651822211362703}
-  - component: {fileID: 8680952156487660114}
   - component: {fileID: 3835860664888547762}
+  - component: {fileID: 2490866229625991774}
   m_Layer: 0
   m_Name: RedGun
   m_TagString: Untagged
@@ -322,25 +322,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.068565786, y: 0.08476162, z: 0.36130235}
   m_Center: {x: -0.0010235608, y: 0.05136919, z: 0.13510908}
---- !u!114 &8680952156487660114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6333571307936869829}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52725146b81b0fc43846be39cdd78230, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
-  range: 100
-  muzzleflash: {fileID: 0}
-  bulletHoleGraphic: {fileID: 0}
-  isFiring: 0
-  selfPrefab: {fileID: 0}
-  prefabName: 
 --- !u!54 &3835860664888547762
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -357,6 +338,41 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2490866229625991774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6333571307936869829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12eafed84cfac5d409bc68036ce276a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 20
+  timeBetweenShooting: 0.05
+  spread: 0.02
+  range: 100
+  reloadTime: 1
+  timeBetweenShots: 0.1
+  magazineSize: 5
+  bulletsPerTap: 1
+  allowButtonHold: 0
+  bulletsLeft: 0
+  bulletsShot: 0
+  shooting: 0
+  readyToShoot: 0
+  reloading: 0
+  attackPoint: {fileID: 6333571308691518615, guid: e5c40a40bb651f1498021efb82303b01, type: 3}
+  selfPrefab: {fileID: 6333571307936869829, guid: e5c40a40bb651f1498021efb82303b01, type: 3}
+  prefabName: Prefabs/Gun
+  muzzleFlash: {fileID: 2957657415812638113, guid: 73e1b78ce0ce46c4b929283d46a952cb, type: 3}
+  bulletHoleGraphic: {fileID: 2746139810729693041, guid: c56f06f69bed8d044a6c10d68610cb3a, type: 3}
+  camShake: {fileID: 0}
+  camShakeMagnitude: 0
+  camShakeDuration: 0
+  AmmunitionText: {fileID: 8923602367238668637, guid: 118630aa466c9e3439eb30037587ab98, type: 3}
 --- !u!1 &6333571308569988005
 GameObject:
   m_ObjectHideFlags: 0
