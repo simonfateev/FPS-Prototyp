@@ -1,69 +1,117 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
+using TMPro;
 
-public class Gun : MonoBehaviour, IPickupableObject
+public class Gun : MonoBehaviour
 {
+    //Gun stats
+    public int damage;
+    public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
+    public int magazineSize, bulletsPerTap;
+    public bool allowButtonHold;
+    int bulletsLeft, bulletsShot;
 
-    public float damage = 10f;
-    public float range = 100f;
-    public GameObject muzzleflash;
-    public GameObject bulletHoleGraphic;
-    public bool isFiring;
+    //bools 
+    bool shooting, readyToShoot, reloading;
 
+    //Reference
+    public Transform attackPoint;
+    public RaycastHit rayHit;
+    private Rigidbody rb;
     public GameObject selfPrefab;
     public string prefabName;
-
-    private Camera cam;
     private AudioSource gunsound;
-    private Rigidbody rb;
 
-    void Awake()
+
+
+    //Graphics
+    public GameObject muzzleFlash, bulletHoleGraphic;
+    public CamShake camShake;
+    public float camShakeMagnitude, camShakeDuration;
+    public TextMeshProUGUI AmmunitionText;
+
+    private void Awake()
     {
-        isFiring = false;
-        cam = Camera.main;
-        muzzleflash.SetActive(false);
-        gunsound = GetComponent<AudioSource>();
+        bulletsLeft = magazineSize;
+        readyToShoot = true;
         rb = GetComponent<Rigidbody>();
         selfPrefab = Resources.Load(prefabName) as GameObject;
+        gunsound = GetComponent<AudioSource>();
     }
-
-    void Update() 
+    private void Update()
     {
-        if (isFiring) {
-            muzzleflash.SetActive(true);  
-        } else {
-            muzzleflash.SetActive(false); 
-        }
+        MyInput();
+        AmmunitionText.SetText(bulletsLeft + " / " + magazineSize);
     }
-
-    public void SetAttachedToPlayer(PlayerScript playerScript) {
+    public void SetAttachedToPlayer(PlayerScript playerScript)
+    {
         rb.isKinematic = true;
-	}
-
-    public void Shoot()
+    }
+    private void MyInput()
     {
-        gunsound.Play(); 
+        if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
+        else shooting = Input.GetKeyDown(KeyCode.Mouse0);
 
-        RaycastHit hit;
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
+        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading) Reload();
+
+        //Shoot
+        if (readyToShoot && shooting && !reloading && bulletsLeft > 0){
+            bulletsShot = bulletsPerTap;
+            Shoot();
+        }
+    }
+    private void Shoot()
+    {
+        readyToShoot = false;
+
+        //Spread
+        float x = Random.Range(-spread, spread);
+        float y = Random.Range(-spread, spread);
+
+        //Calculate Direction with Spread
+        Vector3 direction = Camera.main.transform.forward + new Vector3(x, y, 0);
+
+        gunsound.Play();
+
+        //RayCast
+        if (Physics.Raycast(Camera.main.transform.position, direction, out rayHit, range))
         {
-            Enemy enemy = hit.transform.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                enemy.TakeDamage(damage);
-            }
+            Debug.Log(rayHit.collider.name);
+
+            if (rayHit.collider.CompareTag("Enemy"))
+                rayHit.collider.GetComponent<EnemyAI>().TakeDamage(damage);
         }
 
-        GameObject newHole = Instantiate(bulletHoleGraphic, hit.point + hit.normal * 0.00f, Quaternion.identity);
-        newHole.transform.LookAt(hit.point + hit.normal);
+        //ShakeCamera
+        //camShake.Shake(camShakeDuration, camShakeMagnitude);
+
+        //Graphics
+        Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
+        GameObject newHole = Instantiate(bulletHoleGraphic, rayHit.point + rayHit.normal * 0.00f, Quaternion.identity);
+        newHole.transform.LookAt(rayHit.point + rayHit.normal);
         newHole.transform.position += newHole.transform.forward / 1000;
         Destroy(newHole, 15f);
 
-    }
+        bulletsLeft--;
+        bulletsShot--;
 
-	public void OnPickUp(PlayerScript byPlayer)
-	{
-        Debug.Log("Gun script got picked up");
-	}
+        Invoke("ResetShot", timeBetweenShooting);
+
+        if(bulletsShot > 0 && bulletsLeft > 0)
+        Invoke("Shoot", timeBetweenShots);
+    }
+    private void ResetShot()
+    {
+        readyToShoot = true;
+    }
+    private void Reload()
+    {
+        reloading = true;
+        Invoke("ReloadFinished", reloadTime);
+    }
+    private void ReloadFinished()
+    {
+        bulletsLeft = magazineSize;
+        reloading = false;
+    }
 }

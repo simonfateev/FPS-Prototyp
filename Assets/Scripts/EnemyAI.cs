@@ -8,7 +8,7 @@ public class EnemyAI : MonoBehaviour
 
     public Transform player;
 
-  
+    public float health = 50f;
     public Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
@@ -66,5 +66,21 @@ public class EnemyAI : MonoBehaviour
     private void ChasePlayer()
     {
         agent.SetDestination(player.position);
+    }
+
+    public void TakeDamage(float amount)
+    {
+
+        health -= amount;
+        if (health <= 0)
+        {
+            Die();
+        }
+        Debug.Log("Health = " + health);
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
     }
 }

@@ -43,27 +43,27 @@ public class PlayerScript : MonoBehaviour
             AttemptPickup();
         }
 
-        if (Input.GetButtonDown("Fire1"))
-        {
-            playerGuns[Side.RIGHT].isFiring = true;
-            playerGuns[Side.RIGHT].Shoot();
-        }
+        //if (Input.GetButtonDown("Fire1"))
+        //{
+        //    playerGuns[Side.RIGHT].isFiring = true;
+        //    playerGuns[Side.RIGHT].Shoot();
+        //}
 
-        if (Input.GetButtonUp("Fire1"))
-        {
-            playerGuns[Side.RIGHT].isFiring = false;
-        }
+        //if (Input.GetButtonUp("Fire1"))
+        //{
+        //    playerGuns[Side.RIGHT].isFiring = false;
+        //}
 
-        if (Input.GetButtonDown("Fire2"))
-        {
-            playerGuns[Side.LEFT].isFiring = true;
-            playerGuns[Side.LEFT].Shoot();
-        }
+        //if (Input.GetButtonDown("Fire2"))
+        //{
+        //    playerGuns[Side.LEFT].isFiring = true;
+        //    playerGuns[Side.LEFT].Shoot();
+        //}
 
-        if (Input.GetButtonUp("Fire2"))
-        {
-            playerGuns[Side.LEFT].isFiring = false;
-        }
+        //if (Input.GetButtonUp("Fire2"))
+        //{
+        //    playerGuns[Side.LEFT].isFiring = false;
+        //}
     }
 
     void AttemptPickup()
