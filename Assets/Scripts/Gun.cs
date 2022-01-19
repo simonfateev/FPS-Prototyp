@@ -48,18 +48,17 @@ public class Gun : MonoBehaviour, IPickupableObject
         RaycastHit hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
         {
-            
-
             Enemy enemy = hit.transform.GetComponent<Enemy>();
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);
-
             }
-
         }
 
-        Instantiate(bulletHoleGraphic, hit.point, Quaternion.Euler(90, 180, 0));
+        GameObject newHole = Instantiate(bulletHoleGraphic, hit.point + hit.normal * 0.00f, Quaternion.identity);
+        newHole.transform.LookAt(hit.point + hit.normal);
+        newHole.transform.position += newHole.transform.forward / 1000;
+        Destroy(newHole, 15f);
 
     }
 

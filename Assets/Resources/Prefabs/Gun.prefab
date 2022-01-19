@@ -215,7 +215,7 @@ MonoBehaviour:
   damage: 10
   range: 100
   muzzleflash: {fileID: 6333571308691518614}
-  bulletHoleGraphic: {fileID: 3725509879874758902, guid: f66ecb6e03b9e1249a281fe661de6ffa, type: 3}
+  bulletHoleGraphic: {fileID: 2746139810729693041, guid: c56f06f69bed8d044a6c10d68610cb3a, type: 3}
   isFiring: 0
   selfPrefab: {fileID: 6333571307936869829}
   prefabName: Prefabs/Gun
