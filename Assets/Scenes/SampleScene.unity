@@ -792,6 +792,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 70
       objectReference: {fileID: 0}
+    - target: {fileID: 6333571307936869832, guid: 6775f5e011579964581675dd12fbcc85, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 67420375ae856f24a951850807ddf74a, type: 3}
     - target: {fileID: 8680952156487660114, guid: 6775f5e011579964581675dd12fbcc85, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1062,7 +1066,7 @@ MonoBehaviour:
   camShake: {fileID: 0}
   camShakeMagnitude: 0
   camShakeDuration: 0
-  AmmunitionText: {fileID: 0}
+  AmmunitionText: {fileID: 907222163}
 --- !u!1 &779779718
 GameObject:
   m_ObjectHideFlags: 0
@@ -1253,6 +1257,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6079475032921801819, guid: 4db6467f365558045ae9edc42e52b9f3, type: 3}
   m_PrefabInstance: {fileID: 587948436}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &907222163 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8923602367238668637, guid: 118630aa466c9e3439eb30037587ab98, type: 3}
+  m_PrefabInstance: {fileID: 839531470}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1217111100 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2760381819199848762, guid: 4db6467f365558045ae9edc42e52b9f3, type: 3}
@@ -1545,6 +1560,10 @@ PrefabInstance:
       propertyPath: attackPos
       value: 
       objectReference: {fileID: 220791780}
+    - target: {fileID: 5474561059512286729, guid: 73e1b78ce0ce46c4b929283d46a952cb, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73e1b78ce0ce46c4b929283d46a952cb, type: 3}
 --- !u!1 &1802346899
