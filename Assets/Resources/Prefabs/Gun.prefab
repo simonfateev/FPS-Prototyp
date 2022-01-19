@@ -359,7 +359,7 @@ MonoBehaviour:
   magazineSize: 5
   bulletsPerTap: 1
   allowButtonHold: 0
-  bulletsLeft: 0
+  bulletsLeft: 5
   bulletsShot: 0
   shooting: 0
   readyToShoot: 0

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,24 +49,28 @@ public class PlayerScript : MonoBehaviour
         MyInput();
     }
 
+    private KeyCode getKeyForGunSide(Side side) {
+        if (side == Side.LEFT)
+        {
+            return KeyCode.Mouse1;
+        }
+        else
+        {
+            return KeyCode.Mouse0;
+        }
+    }
+
     public void MyInput()
     {
-        // Right side gun input code this was ass to write
-        if (playerGuns[Side.RIGHT].allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
-        else shooting = Input.GetKeyDown(KeyCode.Mouse0);
-        if (playerGuns[Side.RIGHT].readyToShoot && shooting && !playerGuns[Side.RIGHT].reloading && playerGuns[Side.RIGHT].bulletsLeft > 0)
-        {
-            playerGuns[Side.RIGHT].bulletsShot = playerGuns[Side.RIGHT].bulletsPerTap;
-            playerGuns[Side.RIGHT].Shoot();
-        }
+        foreach (Side side in Enum.GetValues(typeof(Side))) {
+            if (playerGuns[side].allowButtonHold) shooting = Input.GetKey(getKeyForGunSide(side));
+            else shooting = Input.GetKeyDown(getKeyForGunSide(side));
 
-        // Left side gun input code this was equally bad
-        if (playerGuns[Side.LEFT].allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse1);
-        else shooting = Input.GetKeyDown(KeyCode.Mouse1);
-        if (playerGuns[Side.LEFT].readyToShoot && shooting && !playerGuns[Side.LEFT].reloading && playerGuns[Side.LEFT].bulletsLeft > 0)
-        {
-            playerGuns[Side.LEFT].bulletsShot = playerGuns[Side.LEFT].bulletsPerTap;
-            playerGuns[Side.LEFT].Shoot();
+            if (playerGuns[side].readyToShoot && shooting && !playerGuns[side].reloading && playerGuns[side].bulletsLeft > 0)
+            {
+                playerGuns[side].bulletsShot = playerGuns[side].bulletsPerTap;
+                playerGuns[side].Shoot();
+            }
         }
 
         // Reload input code
@@ -110,18 +115,22 @@ public class PlayerScript : MonoBehaviour
 
             // Drop a prefab in front of the player
             Gun gunToDrop = playerGuns[side];
-            Instantiate(gunToDrop.selfPrefab, gunDropPoint.position, Quaternion.identity);
+            GameObject newGunObj = Instantiate(gunToDrop.selfPrefab, gunDropPoint.position, Quaternion.identity);
+            Gun newGunScript = newGunObj.GetComponent<Gun>();
+            
+            newGunScript.bulletsLeft = playerGuns[side].bulletsLeft;
             playerGuns[side] = null;
         }
     }
 
-    void EquipGun(Gun gun, Side side) {
+    void EquipGun(Gun gunScriptToEquip, Side side) {
         DropGun(side);
 
-        GameObject newGun = Instantiate(gun.selfPrefab, attachPoints[side], false);
-        Gun gunScript = newGun.GetComponent<Gun>();
+        GameObject newGun = Instantiate(gunScriptToEquip.selfPrefab, attachPoints[side], false);
+        Gun newGunScript = newGun.GetComponent<Gun>();
 
-        gunScript.SetAttachedToPlayer(this);
-        playerGuns[side] = gunScript;
+        newGunScript.SetAttachedToPlayer(this);
+        newGunScript.bulletsLeft = gunScriptToEquip.bulletsLeft;
+        playerGuns[side] = newGunScript;
     }
 }

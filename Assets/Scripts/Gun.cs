@@ -9,7 +9,8 @@ public class Gun : MonoBehaviour, IPickupableObject
     public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
     public int magazineSize, bulletsPerTap;
     public bool allowButtonHold;
-    public int bulletsLeft, bulletsShot;
+    public int bulletsLeft;
+    public int bulletsShot;
 
     //bools 
     public bool shooting, readyToShoot, reloading;
