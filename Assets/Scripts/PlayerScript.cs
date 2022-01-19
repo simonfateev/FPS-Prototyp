@@ -18,7 +18,6 @@ public class PlayerScript : MonoBehaviour
     public Transform gunAttachPointLeft;
     public Transform gunAttachPointRight;
     public Transform gunDropPoint;
-    public Gun gun;
     public bool shooting;
 
     public Camera cam;
