@@ -230,7 +230,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 3c83ed84a00bcf44aa2b825da2dc4650, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 67420375ae856f24a951850807ddf74a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.1
   m_Pitch: 1
@@ -371,10 +371,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
-  timeBetweenShooting: 0.05
+  timeBetweenShooting: 0.1
   spread: 0.02
   range: 100
-  reloadTime: 1
+  reloadTime: 0.7
   timeBetweenShots: 0.1
   magazineSize: 30
   bulletsPerTap: 1
