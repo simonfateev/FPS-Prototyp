@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: -454712544410159954}
   m_Layer: 0
   m_Name: Gun
-  m_TagString: Untagged
+  m_TagString: pistol
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -352,10 +352,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 20
   timeBetweenShooting: 0.05
+  timeBetweenShots: 0.1
   spread: 0.02
   range: 100
   reloadTime: 1
-  timeBetweenShots: 0.1
   magazineSize: 5
   bulletsPerTap: 1
   allowButtonHold: 0

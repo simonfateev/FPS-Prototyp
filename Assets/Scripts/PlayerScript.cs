@@ -2,16 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
-    private enum Side {
+    private enum Side
+    {
         LEFT,
         RIGHT
-	}
+    }
 
     private float range = 10f;
-    
+
     public GameObject startingLeftGunPrefab;
     public GameObject startingRightGunPrefab;
 
@@ -25,6 +28,13 @@ public class PlayerScript : MonoBehaviour
     private Dictionary<Side, Gun> playerGuns = new Dictionary<Side, Gun>();
     private Dictionary<Side, Transform> attachPoints = new Dictionary<Side, Transform>();
 
+    // player held ammo values
+    public static int ammoPistol;
+    public static int ammoRifle;
+
+    public TextMeshProUGUI ammoDisplayLeft;
+    public TextMeshProUGUI ammoDisplayRight;
+
     void Start()
     {
         // Setup dictionaries
@@ -35,6 +45,10 @@ public class PlayerScript : MonoBehaviour
 
         EquipGun(startingLeftGunPrefab.GetComponent<Gun>(), Side.LEFT);
         EquipGun(startingRightGunPrefab.GetComponent<Gun>(), Side.RIGHT);
+
+        ammoPistol = 10;
+        ammoRifle = 30;
+
     }
 
 
@@ -46,9 +60,11 @@ public class PlayerScript : MonoBehaviour
         }
 
         MyInput();
+        AmmoDisplay();
     }
 
-    private KeyCode getKeyForGunSide(Side side) {
+    private KeyCode getKeyForGunSide(Side side)
+    {
         if (side == Side.LEFT)
         {
             return KeyCode.Mouse1;
@@ -61,24 +77,42 @@ public class PlayerScript : MonoBehaviour
 
     public void MyInput()
     {
-        foreach (Side side in Enum.GetValues(typeof(Side))) {
-            if (playerGuns[side].allowButtonHold) shooting = Input.GetKey(getKeyForGunSide(side));
-            else shooting = Input.GetKeyDown(getKeyForGunSide(side));
-
-            if (playerGuns[side].readyToShoot && shooting && !playerGuns[side].reloading && playerGuns[side].bulletsLeft > 0)
-            {
-                playerGuns[side].bulletsShot = playerGuns[side].bulletsPerTap;
-                playerGuns[side].Shoot();
-            }
-        }
-
-        // Reload input code
-        if (Input.GetKeyDown(KeyCode.R))
+        foreach (Side side in Enum.GetValues(typeof(Side)))
         {
-            playerGuns[Side.LEFT].Reload();
-            playerGuns[Side.RIGHT].Reload();
+
+            if (playerGuns[side].allowButtonHold)
+                shooting = Input.GetKey(getKeyForGunSide(side));
+            else
+                shooting = Input.GetKeyDown(getKeyForGunSide(side));
+
+            switch (playerGuns[side].tag)
+            {
+                case "pistol":
+
+                    if (playerGuns[side].readyToShoot && shooting && ammoPistol > 0)
+                    {
+                        playerGuns[side].bulletsShot = playerGuns[side].bulletsPerTap;
+                        playerGuns[side].Shoot();
+                    }
+
+                    break;
+
+                case "rifle":
+
+                    if (playerGuns[side].readyToShoot && shooting && !playerGuns[side].reloading && ammoRifle > 0)
+                    {
+                        playerGuns[side].bulletsShot = playerGuns[side].bulletsPerTap;
+                        playerGuns[side].Shoot();
+                    }
+
+                    break;
+
+            }
+
         }
+
     }
+
     void AttemptPickup()
     {
         RaycastHit hit;
@@ -94,35 +128,38 @@ public class PlayerScript : MonoBehaviour
                 obj.OnPickUp(this);
 
                 Gun gunScript = hit.transform.GetComponent<Gun>();
-				if (gunScript)
-				{
+                if (gunScript)
+                {
                     EquipGun(gunScript, Side.RIGHT);
                     Destroy(hit.transform.gameObject);
-				}
+                }
             }
         }
 
     }
 
-    void DropGun(Side side) {
-        if (playerGuns[side] != null) {
+    void DropGun(Side side)
+    {
+        if (playerGuns[side] != null)
+        {
             // Wipe everything in the current attach point
             foreach (Transform child in attachPoints[side])
             {
-				Destroy(child.gameObject);
+                Destroy(child.gameObject);
             }
 
             // Drop a prefab in front of the player
             Gun gunToDrop = playerGuns[side];
             GameObject newGunObj = Instantiate(gunToDrop.selfPrefab, gunDropPoint.position, Quaternion.identity);
             Gun newGunScript = newGunObj.GetComponent<Gun>();
-            
+
             newGunScript.bulletsLeft = playerGuns[side].bulletsLeft;
             playerGuns[side] = null;
         }
     }
 
-    void EquipGun(Gun gunScriptToEquip, Side side) {
+    void EquipGun(Gun gunScriptToEquip, Side side)
+    {
         DropGun(side);
 
         GameObject newGun = Instantiate(gunScriptToEquip.selfPrefab, attachPoints[side], false);
@@ -131,5 +168,31 @@ public class PlayerScript : MonoBehaviour
         newGunScript.SetAttachedToPlayer(this);
         newGunScript.bulletsLeft = gunScriptToEquip.bulletsLeft;
         playerGuns[side] = newGunScript;
+    }
+
+
+    void AmmoDisplay()
+    {
+        switch (playerGuns[Side.LEFT].tag)
+        {
+            case "pistol":
+                ammoDisplayLeft.SetText(ammoPistol.ToString());
+                break;
+
+            case "rifle":
+                ammoDisplayLeft.SetText(ammoRifle.ToString());
+                break;
+        }
+
+        switch (playerGuns[Side.RIGHT].tag)
+        {
+            case "pistol":
+                ammoDisplayRight.SetText(ammoPistol.ToString());
+                break;
+
+            case "rifle":
+                ammoDisplayRight.SetText(ammoRifle.ToString());
+                break;
+        }
     }
 }
