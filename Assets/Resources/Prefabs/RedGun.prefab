@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 596365942622409495}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0010235608, y: 0.051, z: 0.3082}
+  m_LocalPosition: {x: 0.0072, y: 0.0237, z: 0.3082}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6333571308569988006}
@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 118823522524076885}
   m_Layer: 0
   m_Name: RedGun
-  m_TagString: Untagged
+  m_TagString: rifle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -385,14 +385,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 30
   timeBetweenShooting: 0.1
+  timeBetweenShots: 0.3
   spread: 0.02
   range: 100
   reloadTime: 0.7
-  timeBetweenShots: 0.3
   magazineSize: 15
   bulletsPerTap: 1
   allowButtonHold: 1
-  attackPoint: {fileID: 0}
+  bulletsLeft: 0
+  bulletsShot: 0
+  shooting: 0
+  readyToShoot: 0
+  reloading: 0
+  attackPoint: {fileID: 2956065340553320803, guid: 73e1b78ce0ce46c4b929283d46a952cb, type: 3}
   selfPrefab: {fileID: 6333571307936869829}
   prefabName: Prefabs/RedGun
   muzzleFlash: {fileID: 2957657415812638113, guid: 73e1b78ce0ce46c4b929283d46a952cb, type: 3}
@@ -512,7 +517,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6333571308691518615
 Transform:
   m_ObjectHideFlags: 0
@@ -521,7 +526,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6333571308691518614}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.084, z: 0.334}
+  m_LocalPosition: {x: 0, y: 0.084, z: 0.321}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6333571307936869830}
