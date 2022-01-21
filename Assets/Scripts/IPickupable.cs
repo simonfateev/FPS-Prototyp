@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IPickupableObject
+public interface IPickupable
 {
     void OnPickUp(PlayerScript byPlayer);
 }

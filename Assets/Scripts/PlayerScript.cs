@@ -65,7 +65,13 @@ public class PlayerScript : MonoBehaviour
         }
 
         MyInput();
+
+        UpdateAmmoDisplays();
     }
+
+    public void AddAmmo(GunType gunType, int change) {
+        ammoStorage[gunType] += change;
+	}
 
     private KeyCode getKeyForGunSide(Side side)
     {
@@ -79,7 +85,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    public void MyInput()
+    void MyInput()
     {
         foreach (Side side in Enum.GetValues(typeof(Side)))
         {
@@ -95,7 +101,6 @@ public class PlayerScript : MonoBehaviour
                     gun.Shoot();
 
                     ammoStorage[gun.gunType]--;
-                    UpdateAmmoDisplays();
                 }
 			}
         }
@@ -157,4 +162,11 @@ public class PlayerScript : MonoBehaviour
             ammoDisplays[side].SetText(ammoStorage[playerGuns[side].gunType].ToString());
 		}
     }
+
+    void OnControllerColliderHit(ControllerColliderHit hit) {
+        IPickupable pickupable = hit.gameObject.GetComponent<IPickupable>();
+        if (pickupable != null) {
+            pickupable.OnPickUp(this);
+		}
+	}
 }
