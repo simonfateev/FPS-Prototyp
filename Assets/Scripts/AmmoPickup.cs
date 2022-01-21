@@ -8,12 +8,16 @@ public class AmmoPickup : MonoBehaviour, IPickupable
     [SerializeField] private GunType ammoTypeToGive;
     [SerializeField] private int amountOfAmmo;
 
+    private bool hasBeenPickedUp = false;
+
 	public void OnPickUp(PlayerScript byPlayer)
 	{
-        byPlayer.AddAmmo(ammoTypeToGive, amountOfAmmo);
+        if (!hasBeenPickedUp) {
+            byPlayer.AddAmmo(ammoTypeToGive, amountOfAmmo);
 
-        // Put sounds, particles here etc whatever you want when it's picked up
+            // Put sounds, particles here etc whatever you want when it's picked up
 
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }
     }
 }
