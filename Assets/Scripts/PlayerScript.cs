@@ -15,9 +15,6 @@ public class PlayerScript : MonoBehaviour
 
     private float range = 10f;
 
-    public GameObject startingLeftGunPrefab;
-    public GameObject startingRightGunPrefab;
-
     public Transform gunAttachPointLeft;
     public Transform gunAttachPointRight;
     public Transform gunDropPoint;
@@ -42,9 +39,6 @@ public class PlayerScript : MonoBehaviour
         attachPoints.Add(Side.LEFT, gunAttachPointLeft);
         attachPoints.Add(Side.RIGHT, gunAttachPointRight);
 
-        EquipGun(startingLeftGunPrefab.GetComponent<Gun>(), Side.LEFT);
-        EquipGun(startingRightGunPrefab.GetComponent<Gun>(), Side.RIGHT);
-
         ammoStorage[GunType.PISTOL] = 7;
         ammoStorage[GunType.RIFLE] = 30;
         ammoStorage[GunType.SHOTGUN] = 8;
@@ -59,9 +53,14 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            AttemptPickup();
+            AttemptPickup(Side.RIGHT);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            AttemptPickup(Side.LEFT);
         }
 
         MyInput();
@@ -90,6 +89,8 @@ public class PlayerScript : MonoBehaviour
         foreach (Side side in Enum.GetValues(typeof(Side)))
         {
             Gun gun = playerGuns[side];
+            if (gun == null)
+                continue; // if no gun on this side skip this side
 
             // if allowButtonHold true, use GetKey, otherwise GetKeyDown
             shooting = gun.allowButtonHold ? Input.GetKey(getKeyForGunSide(side)) : Input.GetKeyDown(getKeyForGunSide(side));
@@ -106,7 +107,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    void AttemptPickup()
+    void AttemptPickup(Side side)
     {
         RaycastHit hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
@@ -116,7 +117,7 @@ public class PlayerScript : MonoBehaviour
             Gun gunScript = hit.transform.GetComponent<Gun>();
             if (gunScript)
             {
-                EquipGun(gunScript, Side.RIGHT);
+                EquipGun(gunScript, side);
                 Destroy(hit.transform.gameObject);
             }
         }
@@ -159,7 +160,8 @@ public class PlayerScript : MonoBehaviour
     {
         // For each side, set the text of the relevant ammo display to the remaning ammo of that gun type
         foreach (Side side in Enum.GetValues(typeof(Side))) {
-            ammoDisplays[side].SetText(ammoStorage[playerGuns[side].gunType].ToString());
+            string ammoText = playerGuns[side] ? ammoStorage[playerGuns[side].gunType].ToString() : " ";
+            ammoDisplays[side].SetText(ammoText);
 		}
     }
 
