@@ -28,16 +28,15 @@ public class PlayerScript : MonoBehaviour
     private Dictionary<Side, Gun> playerGuns = new Dictionary<Side, Gun>();
     private Dictionary<Side, Transform> attachPoints = new Dictionary<Side, Transform>();
 
-    // player held ammo values
-    public static int ammoPistol;
-    public static int ammoRifle;
+    private Dictionary<GunType, int> ammoStorage = new Dictionary<GunType, int>();
 
     public TextMeshProUGUI ammoDisplayLeft;
     public TextMeshProUGUI ammoDisplayRight;
+    private Dictionary<Side, TextMeshProUGUI> ammoDisplays = new Dictionary<Side, TextMeshProUGUI>();
 
     void Start()
     {
-        // Setup dictionaries
+        // Setup vars
         playerGuns.Add(Side.LEFT, null);
         playerGuns.Add(Side.RIGHT, null);
         attachPoints.Add(Side.LEFT, gunAttachPointLeft);
@@ -46,9 +45,14 @@ public class PlayerScript : MonoBehaviour
         EquipGun(startingLeftGunPrefab.GetComponent<Gun>(), Side.LEFT);
         EquipGun(startingRightGunPrefab.GetComponent<Gun>(), Side.RIGHT);
 
-        ammoPistol = 10;
-        ammoRifle = 30;
+        ammoStorage[GunType.PISTOL] = 10;
+        ammoStorage[GunType.RIFLE] = 30;
 
+        ammoDisplays.Add(Side.LEFT, ammoDisplayLeft);
+        ammoDisplays.Add(Side.RIGHT, ammoDisplayRight);
+
+        // Function setup?
+        UpdateAmmoDisplays();
     }
 
     void Update()
@@ -59,7 +63,6 @@ public class PlayerScript : MonoBehaviour
         }
 
         MyInput();
-        AmmoDisplay();
     }
 
     private KeyCode getKeyForGunSide(Side side)
@@ -78,31 +81,22 @@ public class PlayerScript : MonoBehaviour
     {
         foreach (Side side in Enum.GetValues(typeof(Side)))
         {
+            Gun gun = playerGuns[side];
 
-            if (playerGuns[side].allowButtonHold)
-                shooting = Input.GetKey(getKeyForGunSide(side));
-            else
-                shooting = Input.GetKeyDown(getKeyForGunSide(side));
+            // if allowButtonHold true, use GetKey, otherwise GetKeyDown
+            shooting = gun.allowButtonHold ? Input.GetKey(getKeyForGunSide(side)) : Input.GetKeyDown(getKeyForGunSide(side));
 
-            switch (playerGuns[side].tag)
-            {
-                case "pistol":
-                    if (playerGuns[side].readyToShoot && shooting && ammoPistol > 0)
-                    {
-                        playerGuns[side].Shoot();
-                    }
-                    break;
+            if (shooting) {
+                bool hasAmmo = ammoStorage[gun.gunType] > 0;
 
-                case "rifle":
-                    if (playerGuns[side].readyToShoot && shooting && ammoRifle > 0)
-                    {
-                        playerGuns[side].Shoot();
-                    }
-                    break;
-            }
+                if (gun.readyToShoot && hasAmmo) {
+                    gun.Shoot();
 
+                    ammoStorage[gun.gunType]--;
+                    UpdateAmmoDisplays();
+                }
+			}
         }
-
     }
 
     void AttemptPickup()
@@ -163,28 +157,11 @@ public class PlayerScript : MonoBehaviour
     }
 
 
-    void AmmoDisplay()
+    void UpdateAmmoDisplays()
     {
-        switch (playerGuns[Side.LEFT].tag)
-        {
-            case "pistol":
-                ammoDisplayLeft.SetText(ammoPistol.ToString());
-                break;
-
-            case "rifle":
-                ammoDisplayLeft.SetText(ammoRifle.ToString());
-                break;
-        }
-
-        switch (playerGuns[Side.RIGHT].tag)
-        {
-            case "pistol":
-                ammoDisplayRight.SetText(ammoPistol.ToString());
-                break;
-
-            case "rifle":
-                ammoDisplayRight.SetText(ammoRifle.ToString());
-                break;
-        }
+        // For each side, set the text of the relevant ammo display to the remaning ammo of that gun type
+        foreach (Side side in Enum.GetValues(typeof(Side))) {
+            ammoDisplays[side].SetText(ammoStorage[playerGuns[side].gunType].ToString());
+		}
     }
 }

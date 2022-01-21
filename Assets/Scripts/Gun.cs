@@ -1,4 +1,4 @@
-
+﻿
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -11,6 +11,7 @@ public class Gun : MonoBehaviour, IPickupableObject
     public int magazineSize, bulletsPerTap;
     public bool allowButtonHold;
     public int bulletsLeft;
+    public GunType gunType;
 
     //bools 
     public bool shooting, readyToShoot, reloading;
@@ -45,8 +46,8 @@ public class Gun : MonoBehaviour, IPickupableObject
 
     public void Shoot()
     {
-
         readyToShoot = false;
+        Invoke("ResetShot", timeBetweenShots);
 
         //Spread
         float x = Random.Range(-spread, spread);
