@@ -7,7 +7,7 @@ public class Gun : MonoBehaviour, IPickupableObject
 {
     //Gun stats
     public int damage;
-    public float timeBetweenShooting, timeBetweenShots, spread, range, reloadTime;
+    public float timeBetweenShots, spread, range, reloadTime;
     public int magazineSize, bulletsPerTap;
     public bool allowButtonHold;
     public int bulletsLeft;
