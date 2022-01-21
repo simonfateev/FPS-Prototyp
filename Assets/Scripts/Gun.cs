@@ -1,12 +1,13 @@
 ﻿
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class Gun : MonoBehaviour, IPickupableObject
 {
     //Gun stats
     public int damage;
-    public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
+    public float timeBetweenShooting, timeBetweenShots, spread, range, reloadTime;
     public int magazineSize, bulletsPerTap;
     public bool allowButtonHold;
     public int bulletsLeft;
@@ -22,8 +23,7 @@ public class Gun : MonoBehaviour, IPickupableObject
     public GameObject selfPrefab;
     public string prefabName;
     private AudioSource gunsound;
-
-
+    GameObject player = GameObject.Find("PlayerPrefab");
 
     //Graphics
     public GameObject muzzleFlash, bulletHoleGraphic;
@@ -41,15 +41,21 @@ public class Gun : MonoBehaviour, IPickupableObject
     }
     private void Update()
     {
-        AmmunitionText.SetText(bulletsLeft + " / " + magazineSize);
+        //AmmunitionText.SetText(PlayerScript.ammoPistol.ToString());
+        //Debug.Log(PlayerScript.ammoPistol.ToString());
+        //Debug.Log(gameObject.tag);
+
+        //currentGun = gameObject.tag;
+
     }
     public void SetAttachedToPlayer(PlayerScript playerScript)
     {
         rb.isKinematic = true;
     }
-   
+
     public void Shoot()
     {
+
         readyToShoot = false;
 
         //Spread
@@ -80,28 +86,48 @@ public class Gun : MonoBehaviour, IPickupableObject
         newHole.transform.position += newHole.transform.forward / 1000;
         Destroy(newHole, 15f);
 
-        bulletsLeft--;
-        bulletsShot--;
+        // Self explanatory but reduces the player ammo reserve depending on weapon type
+        switch (gameObject.tag)
+        {
+            case "pistol":
 
-        Invoke("ResetShot", timeBetweenShooting);
+                PlayerScript.ammoPistol--;
 
-        if(bulletsShot > 0 && bulletsLeft > 0)
-        Invoke("Shoot", timeBetweenShots);
+                if (PlayerScript.ammoPistol > 0)
+                {
+                    bulletsShot--;
+                    Invoke("ResetShot", timeBetweenShooting);
+                    Invoke("Shoot", timeBetweenShots);
+                }
+
+                Debug.Log("pistol ammo -1 " + PlayerScript.ammoPistol.ToString());
+                break;
+
+            case "rifle":
+
+                PlayerScript.ammoRifle--;
+
+                if (PlayerScript.ammoRifle > 0)
+                {
+                    Invoke("ResetShot", timeBetweenShooting);
+                    Invoke("Shoot", timeBetweenShots);
+                }
+
+                Debug.Log("rifle ammo -1 " + PlayerScript.ammoRifle.ToString());
+                break;
+
+                // Using this you can expand as you see fit for different weapons
+        }
+
+        Debug.Log(bulletsShot);
+
     }
+
     private void ResetShot()
     {
         readyToShoot = true;
     }
-    public void Reload()
-    {
-        reloading = true;
-        Invoke("ReloadFinished", reloadTime);
-    }
-    private void ReloadFinished()
-    {
-        bulletsLeft = magazineSize;
-        reloading = false;
-    }
+
     public void OnPickUp(PlayerScript byPlayer)
     {
         Debug.Log("Gun script got picked up");
