@@ -45,8 +45,10 @@ public class PlayerScript : MonoBehaviour
         EquipGun(startingLeftGunPrefab.GetComponent<Gun>(), Side.LEFT);
         EquipGun(startingRightGunPrefab.GetComponent<Gun>(), Side.RIGHT);
 
-        ammoStorage[GunType.PISTOL] = 10;
+        ammoStorage[GunType.PISTOL] = 7;
         ammoStorage[GunType.RIFLE] = 30;
+        ammoStorage[GunType.SHOTGUN] = 8;
+        ammoStorage[GunType.SNIPER] = 10;
 
         ammoDisplays.Add(Side.LEFT, ammoDisplayLeft);
         ammoDisplays.Add(Side.RIGHT, ammoDisplayRight);
