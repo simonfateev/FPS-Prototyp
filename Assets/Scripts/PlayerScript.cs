@@ -48,8 +48,8 @@ public class PlayerScript : MonoBehaviour
 
         ammoPistol = 10;
         ammoRifle = 30;
-    }
 
+    }
 
     void Update()
     {
@@ -87,24 +87,22 @@ public class PlayerScript : MonoBehaviour
             switch (playerGuns[side].tag)
             {
                 case "pistol":
-
                     if (playerGuns[side].readyToShoot && shooting && ammoPistol > 0)
                     {
                         playerGuns[side].Shoot();
                     }
-
                     break;
 
                 case "rifle":
-
                     if (playerGuns[side].readyToShoot && shooting && ammoRifle > 0)
                     {
                         playerGuns[side].Shoot();
                     }
-
                     break;
             }
+
         }
+
     }
 
     void AttemptPickup()
@@ -129,6 +127,7 @@ public class PlayerScript : MonoBehaviour
                 }
             }
         }
+
     }
 
     void DropGun(Side side)
