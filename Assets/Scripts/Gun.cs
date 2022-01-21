@@ -1,9 +1,9 @@
-﻿
+
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class Gun : MonoBehaviour, IPickupableObject
+public class Gun : MonoBehaviour
 {
     //Gun stats
     public int damage;
@@ -61,8 +61,6 @@ public class Gun : MonoBehaviour, IPickupableObject
         //RayCast
         if (Physics.Raycast(Camera.main.transform.position, direction, out rayHit, range))
         {
-            Debug.Log(rayHit.collider.name);
-
             if (rayHit.collider.CompareTag("Enemy"))
                 rayHit.collider.GetComponent<EnemyAI>().TakeDamage(damage);
         }
@@ -78,10 +76,5 @@ public class Gun : MonoBehaviour, IPickupableObject
     private void ResetShot()
     {
         readyToShoot = true;
-    }
-
-    public void OnPickUp(PlayerScript byPlayer)
-    {
-        Debug.Log("Gun script got picked up");
     }
 }

@@ -108,19 +108,11 @@ public class PlayerScript : MonoBehaviour
         {
             Debug.Log(hit.transform.name);
 
-            IPickupableObject obj = hit.transform.GetComponent<IPickupableObject>();
-            if (obj != null)
+            Gun gunScript = hit.transform.GetComponent<Gun>();
+            if (gunScript)
             {
-                // Tell the pickupable that this specific player got it
-                // no use right now but I figure you'll need it
-                obj.OnPickUp(this);
-
-                Gun gunScript = hit.transform.GetComponent<Gun>();
-                if (gunScript)
-                {
-                    EquipGun(gunScript, Side.RIGHT);
-                    Destroy(hit.transform.gameObject);
-                }
+                EquipGun(gunScript, Side.RIGHT);
+                Destroy(hit.transform.gameObject);
             }
         }
 
@@ -157,7 +149,6 @@ public class PlayerScript : MonoBehaviour
         newGunScript.bulletsLeft = gunScriptToEquip.bulletsLeft;
         playerGuns[side] = newGunScript;
     }
-
 
     void UpdateAmmoDisplays()
     {
