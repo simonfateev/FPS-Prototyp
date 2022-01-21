@@ -139,7 +139,6 @@ public class PlayerScript : MonoBehaviour
             GameObject newGunObj = Instantiate(gunToDrop.selfPrefab, gunDropPoint.position, Quaternion.identity);
             Gun newGunScript = newGunObj.GetComponent<Gun>();
 
-            newGunScript.bulletsLeft = playerGuns[side].bulletsLeft;
             playerGuns[side] = null;
         }
     }
@@ -152,7 +151,6 @@ public class PlayerScript : MonoBehaviour
         Gun newGunScript = newGun.GetComponent<Gun>();
 
         newGunScript.SetAttachedToPlayer(this);
-        newGunScript.bulletsLeft = gunScriptToEquip.bulletsLeft;
         playerGuns[side] = newGunScript;
     }
 

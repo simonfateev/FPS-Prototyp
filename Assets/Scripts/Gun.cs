@@ -7,10 +7,9 @@ public class Gun : MonoBehaviour
 {
     //Gun stats
     public int damage;
-    public float timeBetweenShots, spread, range, reloadTime;
-    public int magazineSize, bulletsPerTap;
+    public float timeBetweenShots, spread, range;
+    public int bulletsPerTap;
     public bool allowButtonHold;
-    public int bulletsLeft;
     public GunType gunType;
 
     //bools 
@@ -32,7 +31,6 @@ public class Gun : MonoBehaviour
 
     private void Awake()
     {
-        bulletsLeft = magazineSize;
         readyToShoot = true;
         rb = GetComponent<Rigidbody>();
         selfPrefab = Resources.Load(prefabName) as GameObject;

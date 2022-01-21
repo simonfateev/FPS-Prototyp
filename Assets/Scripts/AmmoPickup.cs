@@ -17,7 +17,9 @@ public class AmmoPickup : MonoBehaviour, IPickupable
 
             // Put sounds, particles here etc whatever you want when it's picked up
 
+            hasBeenPickedUp = true;
             Destroy(gameObject);
+            
         }
     }
 }
