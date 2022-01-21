@@ -48,7 +48,6 @@ public class PlayerScript : MonoBehaviour
 
         ammoPistol = 10;
         ammoRifle = 30;
-
     }
 
 
@@ -91,7 +90,6 @@ public class PlayerScript : MonoBehaviour
 
                     if (playerGuns[side].readyToShoot && shooting && ammoPistol > 0)
                     {
-                        playerGuns[side].bulletsShot = playerGuns[side].bulletsPerTap;
                         playerGuns[side].Shoot();
                     }
 
@@ -101,16 +99,12 @@ public class PlayerScript : MonoBehaviour
 
                     if (playerGuns[side].readyToShoot && shooting && ammoRifle > 0)
                     {
-                        playerGuns[side].bulletsShot = playerGuns[side].bulletsPerTap;
                         playerGuns[side].Shoot();
                     }
 
                     break;
-
             }
-
         }
-
     }
 
     void AttemptPickup()
@@ -135,7 +129,6 @@ public class PlayerScript : MonoBehaviour
                 }
             }
         }
-
     }
 
     void DropGun(Side side)

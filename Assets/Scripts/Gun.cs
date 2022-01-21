@@ -46,7 +46,6 @@ public class Gun : MonoBehaviour, IPickupableObject
         //Debug.Log(gameObject.tag);
 
         //currentGun = gameObject.tag;
-
     }
     public void SetAttachedToPlayer(PlayerScript playerScript)
     {
@@ -95,9 +94,7 @@ public class Gun : MonoBehaviour, IPickupableObject
 
                 if (PlayerScript.ammoPistol > 0)
                 {
-                    bulletsShot--;
                     Invoke("ResetShot", timeBetweenShooting);
-                    Invoke("Shoot", timeBetweenShots);
                 }
 
                 Debug.Log("pistol ammo -1 " + PlayerScript.ammoPistol.ToString());
@@ -110,7 +107,6 @@ public class Gun : MonoBehaviour, IPickupableObject
                 if (PlayerScript.ammoRifle > 0)
                 {
                     Invoke("ResetShot", timeBetweenShooting);
-                    Invoke("Shoot", timeBetweenShots);
                 }
 
                 Debug.Log("rifle ammo -1 " + PlayerScript.ammoRifle.ToString());
@@ -120,7 +116,6 @@ public class Gun : MonoBehaviour, IPickupableObject
         }
 
         Debug.Log(bulletsShot);
-
     }
 
     private void ResetShot()
