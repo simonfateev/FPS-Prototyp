@@ -99,7 +99,7 @@ public class PlayerScript : MonoBehaviour
 
                 case "rifle":
 
-                    if (playerGuns[side].readyToShoot && shooting && !playerGuns[side].reloading && ammoRifle > 0)
+                    if (playerGuns[side].readyToShoot && shooting && ammoRifle > 0)
                     {
                         playerGuns[side].bulletsShot = playerGuns[side].bulletsPerTap;
                         playerGuns[side].Shoot();
