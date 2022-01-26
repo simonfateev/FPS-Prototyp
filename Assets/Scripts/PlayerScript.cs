@@ -31,6 +31,8 @@ public class PlayerScript : MonoBehaviour
     public TextMeshProUGUI ammoDisplayRight;
     private Dictionary<Side, TextMeshProUGUI> ammoDisplays = new Dictionary<Side, TextMeshProUGUI>();
 
+    public BodySystem bodySystem;
+
     void Start()
     {
         // Setup vars
