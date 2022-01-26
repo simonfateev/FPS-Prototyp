@@ -14,7 +14,10 @@ public class PlayerController : MonoBehaviour
 
 
     [SerializeField] bool lockCursor = true;
-    [SerializeField] bool playerIsGrounded = true;
+    [SerializeField] bool playerIsGrounded;
+    [SerializeField] bool IsMoving;
+
+    private AudioSource audioSource;
 
     float cameraPitch = 0.0f;
     float velocityY = 0.0f;
@@ -30,8 +33,9 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        audioSource = gameObject.GetComponent<AudioSource>();
         controller = GetComponent<CharacterController>();
-        if(lockCursor)
+        if (lockCursor)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -42,6 +46,12 @@ public class PlayerController : MonoBehaviour
     {
         UpdateMouseLook();
         UpdateMovement();
+
+        if (Input.GetAxis("Vertical") != 0) IsMoving = true;
+        else IsMoving = false;
+
+        if (IsMoving && playerIsGrounded && !audioSource.isPlaying) audioSource.Play();
+        if (!IsMoving) audioSource.Stop();
     }
 
 
