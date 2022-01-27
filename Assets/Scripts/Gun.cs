@@ -28,6 +28,9 @@ public class Gun : MonoBehaviour
     public CamShake camShake;
     public float camShakeMagnitude, camShakeDuration;
     public TextMeshProUGUI AmmunitionText;
+    public ParticleSystem hitEffect;
+    public TrailRenderer trailEffect;
+
 
     private void Awake()
     {
@@ -65,10 +68,22 @@ public class Gun : MonoBehaviour
 
         //Graphics
         Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
+
+        var tracer = Instantiate(trailEffect, attackPoint.position, Quaternion.identity);
+        tracer.AddPosition(attackPoint.position);
+
         GameObject newHole = Instantiate(bulletHoleGraphic, rayHit.point + rayHit.normal * 0.00f, Quaternion.identity);
         newHole.transform.LookAt(rayHit.point + rayHit.normal);
         newHole.transform.position += newHole.transform.forward / 1000;
         Destroy(newHole, 15f);
+
+        tracer.transform.position = rayHit.point;
+
+        hitEffect.transform.position = rayHit.point;
+        hitEffect.transform.forward = rayHit.normal;
+        hitEffect.Emit(5);
+
+        Debug.Log("shots fired");
     }
 
     private void ResetShot()
