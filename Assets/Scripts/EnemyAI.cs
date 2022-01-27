@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAI : MonoBehaviour
+public class EnemyAI : Character
 {
     public NavMeshAgent agent;
 
@@ -20,6 +20,8 @@ public class EnemyAI : MonoBehaviour
   
     public float sightRange;
     public bool playerInSightRange;
+
+    public override BodySystem bodySystem { get; set; }
 
     private void Awake()
     {
@@ -81,6 +83,7 @@ public class EnemyAI : MonoBehaviour
 
     void Die()
     {
+        bodySystem.goRagdoll();
         Destroy(gameObject);
     }
 }

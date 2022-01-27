@@ -5,9 +5,9 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class PlayerScript : MonoBehaviour
+public class PlayerScript : Character
 {
-    private enum Side
+    public enum Side
     {
         LEFT,
         RIGHT
@@ -31,7 +31,9 @@ public class PlayerScript : MonoBehaviour
     public TextMeshProUGUI ammoDisplayRight;
     private Dictionary<Side, TextMeshProUGUI> ammoDisplays = new Dictionary<Side, TextMeshProUGUI>();
 
-    void Start()
+    public override BodySystem bodySystem { get; set; }
+
+	void Start()
     {
         // Setup vars
         playerGuns.Add(Side.LEFT, null);
@@ -114,11 +116,10 @@ public class PlayerScript : MonoBehaviour
         {
             Debug.Log(hit.transform.name);
 
-            Gun gunScript = hit.transform.GetComponent<Gun>();
-            if (gunScript)
+            IInteractable interactable = hit.transform.GetComponent<IInteractable>();
+            if (interactable != null)
             {
-                EquipGun(gunScript, side);
-                Destroy(hit.transform.gameObject);
+                interactable.OnInteract(new InteractInfo(this, side));
             }
         }
 
@@ -143,7 +144,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    void EquipGun(Gun gunScriptToEquip, Side side)
+    public void EquipGun(Gun gunScriptToEquip, Side side)
     {
         DropGun(side);
 
