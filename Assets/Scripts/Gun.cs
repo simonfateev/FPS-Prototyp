@@ -28,7 +28,7 @@ public class Gun : MonoBehaviour
     public CamShake camShake;
     public float camShakeMagnitude, camShakeDuration;
     public TextMeshProUGUI AmmunitionText;
-    public ParticleSystem hitEffect;
+    public ParticleSystem hitEffect, hitEffectEnemy;
     public TrailRenderer trailEffect;
 
 
@@ -63,7 +63,19 @@ public class Gun : MonoBehaviour
         if (Physics.Raycast(Camera.main.transform.position, direction, out rayHit, range))
         {
             if (rayHit.collider.CompareTag("Enemy"))
+            {
+                hitEffectEnemy.transform.position = rayHit.point;
+                hitEffectEnemy.transform.forward = rayHit.normal;
+                hitEffectEnemy.Emit(10);
+
                 rayHit.collider.GetComponent<EnemyAI>().TakeDamage(damage);
+            }
+            else
+            {
+                hitEffect.transform.position = rayHit.point;
+                hitEffect.transform.forward = rayHit.normal;
+                hitEffect.Emit(5);
+            }
         }
 
         //Graphics
@@ -78,12 +90,6 @@ public class Gun : MonoBehaviour
         Destroy(newHole, 15f);
 
         tracer.transform.position = rayHit.point;
-
-        hitEffect.transform.position = rayHit.point;
-        hitEffect.transform.forward = rayHit.normal;
-        hitEffect.Emit(5);
-
-        Debug.Log("shots fired");
     }
 
     private void ResetShot()
