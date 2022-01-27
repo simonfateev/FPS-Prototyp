@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5196546215372302094}
   - component: {fileID: 1818116615625939026}
   m_Layer: 0
-  m_Name: ExampleTorso
+  m_Name: ExampleTorsoTwo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3ad14bb4a1105924394160f8bc9379d2, type: 2}
+  - {fileID: 2100000, guid: d6370097f30162b4d9fcccd7d55f228b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -130,4 +130,4 @@ MonoBehaviour:
   type: 1
   rb: {fileID: 0}
   parentSystem: {fileID: 0}
-  selfPrefabPath: Prefabs/BodyParts/ExampleTorso
+  selfPrefabPath: Prefabs/BodyParts/ExampleTorsoTwo

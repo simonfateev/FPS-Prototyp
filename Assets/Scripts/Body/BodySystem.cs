@@ -19,7 +19,7 @@ public class BodySystem : MonoBehaviour
     // DONE - Basic legs model with RigidBody, colliders
     // Activating ragdoll body parts
     // DONE - Attaching body parts
-    // Pickupable by player
+    // DONE - Pickupable by player
 
     // BodyPart
     // DONE - list of Modifier
@@ -32,7 +32,7 @@ public class BodySystem : MonoBehaviour
     // DONE - one method that gets the PlayerScript passed
 
     [Header("References")]
-    public PlayerScript attachedPlayer;
+    public Character attachedToChar;
 
     [Header("Starting parts")]
     public GameObject startingHead;
@@ -40,8 +40,19 @@ public class BodySystem : MonoBehaviour
     public GameObject startingLegs;
     private Dictionary<BodyPartType, BodyPart> bodyParts = new Dictionary<BodyPartType, BodyPart>();
 
+    private Dictionary<BodyPartType, Transform> bodyAttachPoints = new Dictionary<BodyPartType, Transform>();
+
 	private void Start()
 	{
+        // finds 'HEAD', 'TORSO', 'LEGS' object underneath this gameobject
+        foreach (BodyPartType bpt in Enum.GetValues(typeof(BodyPartType)))
+        {
+            bodyAttachPoints.Add(bpt, transform.Find(bpt.ToString()));
+        }
+
+        attachedToChar = GetComponent<Character>();
+        if (attachedToChar != null) attachedToChar.bodySystem = this;
+
         EquipBodyPart(startingHead);
         EquipBodyPart(startingTorso);
         EquipBodyPart(startingLegs);
@@ -50,19 +61,28 @@ public class BodySystem : MonoBehaviour
     private void EquipBodyPart(GameObject bodyPartPrefab) {
         BodyPart bp = bodyPartPrefab.GetComponent<BodyPart>();
         BodyPartType type = bp.type;
-        Transform attachPoint = transform.Find(type.ToString()); // finds 'HEAD', 'TORSO' object underneath this gameobject
 
         // Wipe everything in the current attach point
-        foreach (Transform child in attachPoint)
+        foreach (Transform child in bodyAttachPoints[type])
         {
             Destroy(child.gameObject);
         }
 
-        GameObject newBpObj = Instantiate(bodyPartPrefab, attachPoint, false);
+        GameObject newBpObj = Instantiate(bodyPartPrefab, bodyAttachPoints[type], false);
 		BodyPart newBp = newBpObj.GetComponent<BodyPart>();
         newBp.rb.isKinematic = true;
         bodyParts[type] = newBp;
+        newBp.parentSystem = this;
     }
+
+    public void SwapBodyPart(BodyPart bpToEquip) {
+        // Drop current part
+        BodyPart bpToDrop = bodyParts[bpToEquip.type];
+        GameObject newDroppedBp = Instantiate(bpToDrop.getSelfPrefab(), transform.position + (transform.forward), Quaternion.identity); // spawn new body part in front of player
+
+        // Equip part
+        EquipBodyPart(bpToEquip.getSelfPrefab());
+	}
 
     public float getModifierValue(Modifier mod) {
         // Go through all body parts, if they have the modifier we're looking for, collect it
@@ -79,7 +99,15 @@ public class BodySystem : MonoBehaviour
     public void useAbilityOn(BodyPartType bpt) {
         BodyPart bp = bodyParts[bpt];
         if (bp.specialAbility != null) {
-            bp.specialAbility.UseAbility(attachedPlayer);
-		}
+            if (GetComponent<PlayerScript>() != null) bp.specialAbility.UseAbility(GetComponent<PlayerScript>());
+        }
 	}
+
+    // This will not destroy the existing body parts, they are assumed to be deleted soon anyway if this 'body' has died
+    public void goRagdoll() {
+        foreach (BodyPartType bpt in Enum.GetValues(typeof(BodyPartType))) {
+            BodyPart currentBP = bodyParts[bpt];
+            Instantiate(currentBP.getSelfPrefab(), bodyAttachPoints[bpt].position, Quaternion.identity);
+		}
+    }
 }

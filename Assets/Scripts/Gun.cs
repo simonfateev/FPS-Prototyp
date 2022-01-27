@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class Gun : MonoBehaviour
+public class Gun : MonoBehaviour, IInteractable
 {
     //Gun stats
     public int damage;
@@ -89,5 +89,11 @@ public class Gun : MonoBehaviour
     private void ResetShot()
     {
         readyToShoot = true;
+    }
+
+	public void OnInteract(InteractInfo interactInfo)
+	{
+        interactInfo.byPlayer.EquipGun(this, interactInfo.side);
+        Destroy(gameObject);
     }
 }

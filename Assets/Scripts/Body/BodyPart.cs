@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BodyPart : MonoBehaviour
+public class BodyPart : MonoBehaviour, IInteractable
 {
 	// Scuffed fake dictionary because Unity is scuffed
 	[System.Serializable]
@@ -19,6 +19,8 @@ public class BodyPart : MonoBehaviour
 	public ISpecialAbility specialAbility;
 
 	public Rigidbody rb;
+	public BodySystem parentSystem;
+	public string selfPrefabPath;
 
 	private void Awake()
 	{
@@ -29,6 +31,19 @@ public class BodyPart : MonoBehaviour
 			if (modifiers.ContainsKey(stat.modifier)) Debug.LogError("YOU DUPLICATED THE MODIFIRES AGHGHGHSGHSD");
 
 			modifiers.Add(stat.modifier, stat.value);
+		}
+	}
+
+	public GameObject getSelfPrefab() {
+		return Resources.Load(selfPrefabPath) as GameObject;
+	}
+
+	public void OnInteract(InteractInfo interactInfo)
+	{
+		if (parentSystem == null) {
+			BodySystem toAttachTo = interactInfo.byPlayer.bodySystem;
+			toAttachTo.SwapBodyPart(this);
+			Destroy(gameObject);
 		}
 	}
 }

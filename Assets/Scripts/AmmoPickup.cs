@@ -19,7 +19,6 @@ public class AmmoPickup : MonoBehaviour, IPickupable
 
             hasBeenPickedUp = true;
             Destroy(gameObject);
-            
         }
     }
 }
