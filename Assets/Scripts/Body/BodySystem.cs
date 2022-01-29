@@ -5,32 +5,6 @@ using UnityEngine;
 
 public class BodySystem : MonoBehaviour
 {
-    // BodyPartType
-    // DONE - enum
-
-    // BodySystem
-    // DONE - PlayerScript reference both ways
-    // DONE - stores one BodyPart for each BodyPartType
-    // DONE - stat methods go through each BodyPart and collect stats
-    // DONE - each part gets special ability (or just body, doesn't matter)
-    // Specific key targets specific BodyPartType special
-    // DONE - Basic head model with RigidBody, colliders
-    // DONE - Basic torso model with RigidBody, colliders
-    // DONE - Basic legs model with RigidBody, colliders
-    // Activating ragdoll body parts
-    // DONE - Attaching body parts
-    // DONE - Pickupable by player
-
-    // BodyPart
-    // DONE - list of Modifier
-    // DONE - optional special ability field of type SpecialAbility
-
-    // Modifier
-    // DONE - enum
-
-    // SpecialAbility interface
-    // DONE - one method that gets the PlayerScript passed
-
     [Header("References")]
     public Character attachedToChar;
 
