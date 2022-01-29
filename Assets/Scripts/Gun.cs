@@ -1,4 +1,4 @@
-﻿
+
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -79,7 +79,7 @@ public class Gun : MonoBehaviour, IInteractable
         }
 
         //Graphics
-        Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
+        Instantiate(muzzleFlash, attackPoint);
 
         var tracer = Instantiate(trailEffect, attackPoint.position, Quaternion.identity);
         tracer.AddPosition(attackPoint.position);
