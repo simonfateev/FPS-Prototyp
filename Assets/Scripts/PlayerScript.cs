@@ -13,6 +13,8 @@ public class PlayerScript : Character
         RIGHT
     }
 
+    public static PlayerScript player;
+
     private float range = 10f;
 
     public Transform gunAttachPointLeft;
@@ -27,11 +29,13 @@ public class PlayerScript : Character
 
     private Dictionary<GunType, int> ammoStorage = new Dictionary<GunType, int>();
 
-    public TextMeshProUGUI ammoDisplayLeft;
-    public TextMeshProUGUI ammoDisplayRight;
-    private Dictionary<Side, TextMeshProUGUI> ammoDisplays = new Dictionary<Side, TextMeshProUGUI>();
-
     public override BodySystem bodySystem { get; set; }
+
+	void Awake()
+	{
+        // Scuffed singleton
+        player = this;
+    }
 
 	void Start()
     {
@@ -45,12 +49,6 @@ public class PlayerScript : Character
         ammoStorage[GunType.RIFLE] = 30;
         ammoStorage[GunType.SHOTGUN] = 8;
         ammoStorage[GunType.SNIPER] = 10;
-
-        ammoDisplays.Add(Side.LEFT, ammoDisplayLeft);
-        ammoDisplays.Add(Side.RIGHT, ammoDisplayRight);
-
-        // Function setup?
-        UpdateAmmoDisplays();
     }
 
     void Update()
@@ -66,8 +64,6 @@ public class PlayerScript : Character
         }
 
         MyInput();
-
-        UpdateAmmoDisplays();
     }
 
     public void AddAmmo(GunType gunType, int change) {
@@ -155,14 +151,14 @@ public class PlayerScript : Character
         playerGuns[side] = newGunScript;
     }
 
-    void UpdateAmmoDisplays()
-    {
-        // For each side, set the text of the relevant ammo display to the remaning ammo of that gun type
-        foreach (Side side in Enum.GetValues(typeof(Side))) {
-            string ammoText = playerGuns[side] ? ammoStorage[playerGuns[side].gunType].ToString() : " ";
-            ammoDisplays[side].SetText(ammoText);
-		}
-    }
+    // Get gun for side, null if doesn't exist
+    public Gun GetGunForSide(Side side) {
+        return playerGuns[side] ? playerGuns[side] : null;
+	}
+
+    public int GetAmmoForGun(GunType gt) {
+        return ammoStorage[gt];
+	}
 
     void OnControllerColliderHit(ControllerColliderHit hit) {
         IPickupable pickupable = hit.gameObject.GetComponent<IPickupable>();
