@@ -62,13 +62,14 @@ public class Gun : MonoBehaviour, IInteractable
         //RayCast
         if (Physics.Raycast(Camera.main.transform.position, direction, out rayHit, range))
         {
-            if (rayHit.collider.CompareTag("Enemy"))
+            Character characterHit = rayHit.transform.GetComponent<Character>();
+            if (characterHit != null)
             {
                 hitEffectEnemy.transform.position = rayHit.point;
                 hitEffectEnemy.transform.forward = rayHit.normal;
                 hitEffectEnemy.Emit(10);
 
-                rayHit.collider.GetComponent<EnemyAI>().TakeDamage(damage);
+                characterHit.TakeDamage(damage);
             }
             else
             {

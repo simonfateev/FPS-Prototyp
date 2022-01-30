@@ -17,6 +17,7 @@ public class PlayerScript : Character
 
     private float range = 10f;
 
+    [Header("PlayerScript")]
     public Transform gunAttachPointLeft;
     public Transform gunAttachPointRight;
     public Transform gunDropPoint;
@@ -166,5 +167,10 @@ public class PlayerScript : Character
         if (pickupable != null) {
             pickupable.OnPickUp(this);
 		}
+	}
+
+	public override void OnDeath()
+	{
+        Debug.Log("Player has died");
 	}
 }

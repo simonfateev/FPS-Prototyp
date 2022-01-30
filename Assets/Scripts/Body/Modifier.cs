@@ -5,5 +5,7 @@ using UnityEngine;
 public enum Modifier
 {
     HEALTH,
-    MOVEMENTSPEED
+    MOVEMENTSPEED,
+    JUMPHEIGHT,
+    GRAVITY
 }

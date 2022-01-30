@@ -4,11 +4,11 @@ using UnityEngine.AI;
 
 public class EnemyAI : Character
 {
+    [Header("Enemy")]
     public NavMeshAgent agent;
 
     public Transform player;
 
-    public float health = 50f;
     public Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
@@ -70,19 +70,14 @@ public class EnemyAI : Character
         agent.SetDestination(player.position);
     }
 
-    public void TakeDamage(float amount)
-    {
+	public override void TakeDamage(float damage)
+	{
+		base.TakeDamage(damage);
         SoundManager.PlaySound(SoundManager.Sound.enemyhit, transform.position);
-        health -= amount;
-        if (health <= 0)
-        {
-            Die();
-        }
-        Debug.Log("Health = " + health);
-    }
+	}
 
-    void Die()
-    {
+	public override void OnDeath()
+	{
         bodySystem.GoRagdoll();
         Destroy(gameObject);
     }

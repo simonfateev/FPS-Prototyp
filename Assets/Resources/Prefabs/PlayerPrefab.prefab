@@ -123,14 +123,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ef6fc0c2159a146a3493c67703bbcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultMaxHealth: 50
+  defaultMovementSpeed: 0
+  currentHealth: 0
   gunAttachPointLeft: {fileID: 2760381819775411185}
   gunAttachPointRight: {fileID: 2760381819212680262}
   gunDropPoint: {fileID: 7064331149626746893}
   shooting: 0
   cam: {fileID: 2760381820294819095}
-  ammoDisplayLeft: {fileID: 0}
-  ammoDisplayRight: {fileID: 0}
-  bodySystem: {fileID: 0}
 --- !u!114 &4702226583248345620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9afe3c45fd81b8f41b7edb8332e00e90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachedPlayer: {fileID: 0}
+  attachedToChar: {fileID: 0}
   startingHead: {fileID: 6657070889116033070}
   startingTorso: {fileID: 2164723329889754126}
   startingLegs: {fileID: 1053138025945503197}

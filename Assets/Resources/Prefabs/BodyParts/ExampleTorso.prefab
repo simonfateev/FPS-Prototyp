@@ -126,7 +126,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ae9b35494ad8e42b7b9a13083ea587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statList: []
+  statList:
+  - modifier: 0
+    value: 200
   type: 1
   rb: {fileID: 0}
   parentSystem: {fileID: 0}

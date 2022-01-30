@@ -1138,6 +1138,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410299867}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!195 &455116654 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 2662710428182585911, guid: a0b84b8ddc51f8345a9b4c9d112409c3, type: 3}
+  m_PrefabInstance: {fileID: 1478891825}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &506858110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1566,6 +1571,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2760381819199848766, guid: 4db6467f365558045ae9edc42e52b9f3, type: 3}
+      propertyPath: defaultMaxHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760381819199848766, guid: 4db6467f365558045ae9edc42e52b9f3, type: 3}
       propertyPath: gunAttachPointLeft
       value: 
       objectReference: {fileID: 1717351956}
@@ -1583,11 +1592,11 @@ PrefabInstance:
       objectReference: {fileID: 175359436767823148, guid: 74ae8e9619ed8754dab3eb2b44ec0e3a, type: 3}
     - target: {fileID: 4137375265039632431, guid: 4db6467f365558045ae9edc42e52b9f3, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4514809913579608569, guid: 4db6467f365558045ae9edc42e52b9f3, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5537191179133394440, guid: 4db6467f365558045ae9edc42e52b9f3, type: 3}
       propertyPath: m_RootOrder
@@ -2829,11 +2838,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2662710428182585911, guid: a0b84b8ddc51f8345a9b4c9d112409c3, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5385783985264689144, guid: a0b84b8ddc51f8345a9b4c9d112409c3, type: 3}
+      propertyPath: agent
+      value: 
+      objectReference: {fileID: 455116654}
+    - target: {fileID: 5385783985264689144, guid: a0b84b8ddc51f8345a9b4c9d112409c3, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1217111101}
+    - target: {fileID: 5385783985264689144, guid: a0b84b8ddc51f8345a9b4c9d112409c3, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0b84b8ddc51f8345a9b4c9d112409c3, type: 3}

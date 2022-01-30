@@ -30,6 +30,8 @@ public class BodySystem : MonoBehaviour
         EquipBodyPart(startingHead);
         EquipBodyPart(startingTorso);
         EquipBodyPart(startingLegs);
+
+        attachedToChar.SetHealth(attachedToChar.GetCurrentMaxHealth());
     }
 
     private void EquipBodyPart(GameObject bodyPartPrefab) {
@@ -56,7 +58,8 @@ public class BodySystem : MonoBehaviour
 
         // Equip part
         EquipBodyPart(bpToEquip.GetSelfPrefab());
-	}
+        attachedToChar.RecalculateCurrentHealth();
+    }
 
     public float GetModifierValue(Modifier mod) {
         // Go through all body parts, if they have the modifier we're looking for, collect it
