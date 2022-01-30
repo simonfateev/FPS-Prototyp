@@ -16,6 +16,12 @@ public class BodySystem : MonoBehaviour
 
     private Dictionary<BodyPartType, Transform> bodyAttachPoints = new Dictionary<BodyPartType, Transform>();
 
+	private void Awake()
+	{
+        attachedToChar = GetComponent<Character>();
+        if (attachedToChar != null) attachedToChar.bodySystem = this;
+    }
+
 	private void Start()
 	{
         // finds 'HEAD', 'TORSO', 'LEGS' object underneath this gameobject
@@ -23,9 +29,6 @@ public class BodySystem : MonoBehaviour
         {
             bodyAttachPoints.Add(bpt, transform.Find(bpt.ToString()));
         }
-
-        attachedToChar = GetComponent<Character>();
-        if (attachedToChar != null) attachedToChar.bodySystem = this;
 
         EquipBodyPart(startingHead);
         EquipBodyPart(startingTorso);
