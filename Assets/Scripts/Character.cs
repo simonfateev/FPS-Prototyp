@@ -8,7 +8,9 @@ public abstract class Character : MonoBehaviour
 
     [Header("General Character")]
     public float defaultMaxHealth;
-    public float defaultMovementSpeed;
+    public float defaultMovementSpeed = 8f;
+    public float defaultGravity = -13f;
+    public float defaultJump = 1f;
 
     [SerializeField] [Tooltip("For debugging, don't change this value")]
     private float currentHealth;
@@ -50,6 +52,16 @@ public abstract class Character : MonoBehaviour
     public float GetCurrentMovementSpeed() {
         return defaultMovementSpeed + bodySystem.GetModifierValue(Modifier.MOVEMENTSPEED);
 	}
+
+    public float GetCurrentGravity()
+    {
+        return defaultGravity + bodySystem.GetModifierValue(Modifier.GRAVITY);
+    }
+
+    public float GetCurrentJumpHeight()
+    {
+        return defaultJump + bodySystem.GetModifierValue(Modifier.JUMPHEIGHT);
+    }
 
     public virtual void TakeDamage(float damage) {
         currentHealth -= damage;

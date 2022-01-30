@@ -117,7 +117,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultMaxHealth: 100
-  defaultMovementSpeed: 0
+  defaultMovementSpeed: 8
+  defaultGravity: -13
+  defaultJump: 0
   currentHealth: 0
   agent: {fileID: 0}
   player: {fileID: 0}

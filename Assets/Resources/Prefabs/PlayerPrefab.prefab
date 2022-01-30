@@ -103,9 +103,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 2760381820294819093}
   mouseSens: 4.5
-  walkSpeed: 13
-  gravity: -13.91
-  jumpHeight: 2
   moveSmoothTime: 0.3
   mouseSmoothTime: 0.03
   lockCursor: 1
@@ -124,7 +121,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultMaxHealth: 50
-  defaultMovementSpeed: 0
+  defaultMovementSpeed: 15
+  defaultGravity: -13
+  defaultJump: 1
   currentHealth: 0
   gunAttachPointLeft: {fileID: 2760381819775411185}
   gunAttachPointRight: {fileID: 2760381819212680262}

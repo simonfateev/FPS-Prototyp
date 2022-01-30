@@ -6,9 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] Transform playerCamera = null;
     [SerializeField] float mouseSens = 4.5f;
-    [SerializeField] float walkSpeed = 8f;
-    [SerializeField] float gravity = -13f;
-    [SerializeField] float jumpHeight = 1.0f;
+    float walkSpeed;
+    float gravity;
+    float jumpHeight;
     [SerializeField] [Range(0.0f, 5.0f)] float moveSmoothTime = 0.3f;
     [SerializeField] [Range(0.0f, 5.0f)] float mouseSmoothTime = 0.03f;
 
@@ -27,10 +27,12 @@ public class PlayerController : MonoBehaviour
     Vector2 currentMouseDelta = Vector2.zero;
     Vector2 currentMouseDeltaVelocity = Vector2.zero;
 
-   
+    Character playerCharacter;
 
     void Start()
     {
+        playerCharacter = PlayerScript.player.bodySystem.attachedToChar;
+
         controller = GetComponent<CharacterController>();
         if (lockCursor)
         {
@@ -41,6 +43,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        walkSpeed = playerCharacter.GetCurrentMovementSpeed();
+        gravity = playerCharacter.GetCurrentGravity();
+        jumpHeight = playerCharacter.GetCurrentJumpHeight();
+
         UpdateMouseLook();
         UpdateMovement();
 
@@ -49,7 +55,6 @@ public class PlayerController : MonoBehaviour
 
         if (IsMoving && playerIsGrounded) SoundManager.PlaySound(SoundManager.Sound.footstep1);
     }
-
 
     void UpdateMouseLook()
     {
