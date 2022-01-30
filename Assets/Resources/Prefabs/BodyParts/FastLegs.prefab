@@ -129,9 +129,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statList:
   - modifier: 1
-    value: 5
+    value: 6
   - modifier: 2
-    value: 5
+    value: 3
   type: 2
   rb: {fileID: 0}
   parentSystem: {fileID: 0}

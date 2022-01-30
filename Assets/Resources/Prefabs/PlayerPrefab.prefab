@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultMaxHealth: 50
-  defaultMovementSpeed: 15
+  defaultMovementSpeed: 10
   defaultGravity: -13
   defaultJump: 1
   currentHealth: 0

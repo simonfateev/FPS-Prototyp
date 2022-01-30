@@ -130,6 +130,10 @@ MonoBehaviour:
   statList:
   - modifier: 3
     value: 10
+  - modifier: 1
+    value: 3
+  - modifier: 2
+    value: 1
   type: 2
   rb: {fileID: 0}
   parentSystem: {fileID: 0}
