@@ -56,7 +56,6 @@ public abstract class Character : MonoBehaviour
         if (currentHealth < 0) {
             OnDeath();
 		}
-
         Debug.Log(gameObject.ToString() + " took " + damage + " damage");
 	}
 
