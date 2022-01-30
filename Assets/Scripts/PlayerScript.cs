@@ -35,6 +35,7 @@ public class PlayerScript : Character
 	{
         // Scuffed singleton
         player = this;
+        SoundManager.Initialize();
     }
 
 	void Start()

@@ -16,6 +16,7 @@ public class AmmoPickup : MonoBehaviour, IPickupable
             byPlayer.AddAmmo(ammoTypeToGive, amountOfAmmo);
 
             // Put sounds, particles here etc whatever you want when it's picked up
+            SoundManager.PlaySound(SoundManager.Sound.ammopickup, transform.position);
 
             hasBeenPickedUp = true;
             Destroy(gameObject);

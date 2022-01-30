@@ -72,7 +72,7 @@ public class EnemyAI : Character
 
     public void TakeDamage(float amount)
     {
-
+        SoundManager.PlaySound(SoundManager.Sound.enemyhit, transform.position);
         health -= amount;
         if (health <= 0)
         {
