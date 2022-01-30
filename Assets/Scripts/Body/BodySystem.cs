@@ -52,13 +52,13 @@ public class BodySystem : MonoBehaviour
     public void SwapBodyPart(BodyPart bpToEquip) {
         // Drop current part
         BodyPart bpToDrop = bodyParts[bpToEquip.type];
-        GameObject newDroppedBp = Instantiate(bpToDrop.getSelfPrefab(), transform.position + (transform.forward), Quaternion.identity); // spawn new body part in front of player
+        GameObject newDroppedBp = Instantiate(bpToDrop.GetSelfPrefab(), transform.position + (transform.forward), Quaternion.identity); // spawn new body part in front of player
 
         // Equip part
-        EquipBodyPart(bpToEquip.getSelfPrefab());
+        EquipBodyPart(bpToEquip.GetSelfPrefab());
 	}
 
-    public float getModifierValue(Modifier mod) {
+    public float GetModifierValue(Modifier mod) {
         // Go through all body parts, if they have the modifier we're looking for, collect it
         // finally sum them all up and return
         float total = 0f;
@@ -70,7 +70,7 @@ public class BodySystem : MonoBehaviour
         return total;
     }
 
-    public void useAbilityOn(BodyPartType bpt) {
+    public void UseAbilityOnBodyPart(BodyPartType bpt) {
         BodyPart bp = bodyParts[bpt];
         if (bp.specialAbility != null) {
             if (GetComponent<PlayerScript>() != null) bp.specialAbility.UseAbility(GetComponent<PlayerScript>());
@@ -78,10 +78,10 @@ public class BodySystem : MonoBehaviour
 	}
 
     // This will not destroy the existing body parts, they are assumed to be deleted soon anyway if this 'body' has died
-    public void goRagdoll() {
+    public void GoRagdoll() {
         foreach (BodyPartType bpt in Enum.GetValues(typeof(BodyPartType))) {
             BodyPart currentBP = bodyParts[bpt];
-            Instantiate(currentBP.getSelfPrefab(), bodyAttachPoints[bpt].position, Quaternion.identity);
+            Instantiate(currentBP.GetSelfPrefab(), bodyAttachPoints[bpt].position, Quaternion.identity);
 		}
     }
 }

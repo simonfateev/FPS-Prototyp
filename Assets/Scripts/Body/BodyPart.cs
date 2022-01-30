@@ -34,7 +34,7 @@ public class BodyPart : MonoBehaviour, IInteractable
 		}
 	}
 
-	public GameObject getSelfPrefab() {
+	public GameObject GetSelfPrefab() {
 		return Resources.Load(selfPrefabPath) as GameObject;
 	}
 

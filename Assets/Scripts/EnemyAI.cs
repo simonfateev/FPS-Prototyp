@@ -83,7 +83,7 @@ public class EnemyAI : Character
 
     void Die()
     {
-        bodySystem.goRagdoll();
+        bodySystem.GoRagdoll();
         Destroy(gameObject);
     }
 }
