@@ -45,7 +45,7 @@ public class Gun : MonoBehaviour, IInteractable
         rb.isKinematic = true;
     }
 
-    public void Shoot()
+    public void Shoot(Vector3 directionToShoot)
     {
         readyToShoot = false;
         Invoke("ResetShot", timeBetweenShots);
@@ -55,12 +55,12 @@ public class Gun : MonoBehaviour, IInteractable
         float y = Random.Range(-spread, spread);
 
         //Calculate Direction with Spread
-        Vector3 direction = Camera.main.transform.forward + new Vector3(x, y, 0);
+        Vector3 finalDirection = directionToShoot + new Vector3(Random.Range(-spread, spread), Random.Range(-spread, spread), Random.Range(-spread, spread));
 
         gunsound.Play();
 
         //RayCast
-        if (Physics.Raycast(Camera.main.transform.position, direction, out rayHit, range))
+        if (Physics.Raycast(Camera.main.transform.position, finalDirection, out rayHit, range))
         {
             Character characterHit = rayHit.transform.GetComponent<Character>();
             if (characterHit != null)
