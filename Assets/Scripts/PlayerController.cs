@@ -66,9 +66,12 @@ public class PlayerController : MonoBehaviour
 
         cameraPitch = Mathf.Clamp(cameraPitch, -90.0f, 90.0f);
 
-        playerCamera.localEulerAngles = Vector3.right * cameraPitch;
+        if (Time.timeScale > 0)
+        {
+            playerCamera.localEulerAngles = Vector3.right * cameraPitch;
+            transform.Rotate(Vector3.up * currentMouseDelta.x * mouseSens);
+        }
 
-        transform.Rotate(Vector3.up * currentMouseDelta.x * mouseSens);
     }
 
 

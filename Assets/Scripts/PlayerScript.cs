@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : Character
 {
@@ -32,11 +33,16 @@ public class PlayerScript : Character
 
     public override BodySystem bodySystem { get; set; }
 
+    public GameObject deathScreen;
+
 	void Awake()
 	{
         // Scuffed singleton
         player = this;
         SoundManager.Initialize();
+
+        Time.timeScale = 1.0f;
+        deathScreen.SetActive(false);
     }
 
 	void Start()
@@ -51,6 +57,8 @@ public class PlayerScript : Character
         ammoStorage[GunType.RIFLE] = 30;
         ammoStorage[GunType.SHOTGUN] = 8;
         ammoStorage[GunType.SNIPER] = 10;
+
+        deathScreen.SetActive(false);
     }
 
     void Update()
@@ -169,8 +177,10 @@ public class PlayerScript : Character
 		}
 	}
 
-	public override void OnDeath()
-	{
-        Debug.Log("Player has died");
+    public override void OnDeath()
+    {
+        Debug.Log("player ded");
+        deathScreen.SetActive(true);
+        Time.timeScale = 0.0f;
 	}
 }

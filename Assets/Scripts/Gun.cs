@@ -67,7 +67,7 @@ public class Gun : MonoBehaviour, IInteractable
             {
                 hitEffectEnemy.transform.position = rayHit.point;
                 hitEffectEnemy.transform.forward = rayHit.normal;
-                hitEffectEnemy.Emit(10);
+                hitEffectEnemy.Emit(5);
 
                 characterHit.TakeDamage(damage);
             }
