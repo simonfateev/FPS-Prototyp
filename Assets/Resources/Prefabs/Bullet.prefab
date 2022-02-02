@@ -102,17 +102,17 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.81780994, b: 0, a: 1}
-      key1: {r: 1, g: 0.81780994, b: 0, a: 0}
-      key2: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 1, g: 0.99064004, b: 0.9481132, a: 1}
+      key1: {r: 1, g: 0.9925946, b: 0.9589484, a: 0}
+      key2: {r: 1, g: 1, b: 1, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 65535
-      ctime2: 0
+      ctime1: 13685
+      ctime2: 65535
       ctime3: 0
       ctime4: 0
       ctime5: 0
@@ -127,7 +127,7 @@ TrailRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_NumColorKeys: 2
+      m_NumColorKeys: 3
       m_NumAlphaKeys: 2
     numCornerVertices: 3
     numCapVertices: 3
@@ -361,9 +361,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.04
-  m_Height: 0.18730874
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.018654369, z: 0}
+  m_Height: 0.1943185
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.01430963}
 --- !u!114 &6392736579164619030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,7 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6751eda2f1a0034cb98d5d15d32448c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 5
+  bulletSpeed: 80
 --- !u!54 &6392736579164619029
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -392,4 +392,4 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1

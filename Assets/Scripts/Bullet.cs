@@ -9,8 +9,9 @@ public class Bullet : MonoBehaviour
     private Rigidbody rb;
     private float bulletDamage;
     private bool alreadyHit;
+    private List<GameObject> ignoreCollisionsWith;
 
-    void Start()
+    void Awake()
     {
         Destroy(gameObject, 10f); // if they somehow survive for 10 seconds kill them
 
@@ -19,15 +20,17 @@ public class Bullet : MonoBehaviour
     }
 
     // Should be called when bullet is instatiated
-    public void Setup(Vector3 direction, float bulletDamage) {
+    public void Setup(Vector3 direction, float bulletDamage, List<GameObject> ignoreCollisionsWith) {
         this.bulletDamage = bulletDamage;
+        this.ignoreCollisionsWith = ignoreCollisionsWith;
+
         rb.AddForce(direction.normalized * bulletSpeed * 0.1f, ForceMode.Impulse);
         transform.rotation = Quaternion.LookRotation(direction);
 	}
 
 	public void OnCollisionEnter(Collision other)
 	{
-        if (!alreadyHit) {
+        if (!alreadyHit && !ignoreCollisionsWith.Contains(other.gameObject)) {
             alreadyHit = true;
             Character hitCharacter = other.collider.GetComponent<Character>();
             if (hitCharacter != null)
