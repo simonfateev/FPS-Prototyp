@@ -1748,6 +1748,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1768521787}
     - target: {fileID: 2760381819199848766, guid: 4db6467f365558045ae9edc42e52b9f3, type: 3}
+      propertyPath: deathScreen
+      value: 
+      objectReference: {fileID: 2042675798}
+    - target: {fileID: 2760381819199848766, guid: 4db6467f365558045ae9edc42e52b9f3, type: 3}
       propertyPath: gunDropPoint
       value: 
       objectReference: {fileID: 220791780}
@@ -3667,7 +3671,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1757703460
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4804,7 +4808,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2042675799
 RectTransform:
   m_ObjectHideFlags: 0
