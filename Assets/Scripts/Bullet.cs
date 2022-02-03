@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
     private bool alreadyHit;
     private List<GameObject> ignoreCollisionsWith;
 
+    public GameObject bulletModel;
     public ParticleSystem hitEffect, hitEffectEnemy;
 
     void Awake()
@@ -34,6 +35,10 @@ public class Bullet : MonoBehaviour
 	{
         if (!alreadyHit && !ignoreCollisionsWith.Contains(other.gameObject)) {
             alreadyHit = true;
+            bulletModel.SetActive(false);
+            rb.isKinematic = true;
+            rb.velocity = Vector3.zero;
+
             Character hitCharacter = other.collider.GetComponent<Character>();
             ContactPoint contactPoint = other.GetContact(0);
             if (hitCharacter != null)
@@ -42,16 +47,14 @@ public class Bullet : MonoBehaviour
                 hitEffectEnemy.transform.forward = contactPoint.normal;
                 hitEffectEnemy.Emit(5);
                 hitCharacter.TakeDamage(bulletDamage);
-                Debug.Log("hit enemy");
             } else
             {
                 hitEffect.transform.position = contactPoint.point;
                 hitEffect.transform.forward = contactPoint.normal;
                 hitEffect.Emit(10);
                 SoundManager.PlaySound(SoundManager.Sound.bulletimpact, transform.position);
-                Debug.Log("hit non player object");
             }
-            Destroy(gameObject, 10f);
+            Destroy(gameObject, 2f);
         }
 	}
 }
