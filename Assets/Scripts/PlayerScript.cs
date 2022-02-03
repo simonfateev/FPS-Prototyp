@@ -191,6 +191,7 @@ public class PlayerScript : Character
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
+        SoundManager.PlaySound(SoundManager.Sound.enemyhit, transform.position);
         hitEffectAnim.Play("onHit");
     }
 

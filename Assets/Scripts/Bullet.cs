@@ -48,14 +48,13 @@ public class Bullet : MonoBehaviour
                 hitEffectEnemy.Emit(5);
 
                 hitCharacter.TakeDamage(bulletDamage);
-                SoundManager.PlaySound(SoundManager.Sound.enemyhit, transform.position);
-
                 Debug.Log("hit enemy");
             } else
             {
                 hitEffect.transform.position = contactPoint.point;
                 hitEffect.transform.forward = contactPoint.normal;
                 hitEffect.Emit(10);
+
                 SoundManager.PlaySound(SoundManager.Sound.bulletimpact, transform.position);
             }
             Destroy(gameObject, 2f);

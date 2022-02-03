@@ -83,12 +83,12 @@ public class EnemyAI : Character
                 enemyGun.Shoot(gunShootDirection, false);
             }
         } else {
-            Patroling();
+            Patrolling();
             isAlreadyChasingPlayer = false;
 		}
     }
 
-    private void Patroling()
+    private void Patrolling()
     {
         if (!walkPointSet) SearchWalkPoint();
 
@@ -116,7 +116,8 @@ public class EnemyAI : Character
 	public override void TakeDamage(float damage)
 	{
 		base.TakeDamage(damage);
-	}
+        SoundManager.PlaySound(SoundManager.Sound.enemyhit, transform.position);
+    }
 
 	public override void OnDeath()
 	{
