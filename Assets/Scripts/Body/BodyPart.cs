@@ -25,6 +25,7 @@ public class BodyPart : MonoBehaviour, IInteractable
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody>();
+		specialAbility = GetComponent<ISpecialAbility>();
 
 		// Turn fake dict into a real dict
 		foreach (Stat stat in statList) {
