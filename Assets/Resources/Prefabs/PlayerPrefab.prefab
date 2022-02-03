@@ -29,7 +29,7 @@ Transform:
   m_Children:
   - {fileID: 7094648123749719295}
   m_Father: {fileID: 2760381819199848765}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2760381819199848762
 GameObject:
@@ -64,9 +64,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6079475032921801819}
-  - {fileID: 7064331149626746893}
   - {fileID: 5929522738212280276}
   - {fileID: 4137375265039632431}
+  - {fileID: 7064331149626746893}
   - {fileID: 4514809913579608569}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ef6fc0c2159a146a3493c67703bbcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultMaxHealth: 50
+  defaultMaxHealth: 5000
   defaultMovementSpeed: 10
   defaultGravity: -13
   defaultJump: 1
@@ -157,7 +157,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: be49b29d49ad0ef4f98c10a15dd51713, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -316,6 +316,7 @@ GameObject:
   - component: {fileID: 2760381820294819094}
   - component: {fileID: 706318059015091857}
   - component: {fileID: 8324880335479277018}
+  - component: {fileID: 1913828546}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -415,8 +416,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHead: {fileID: 6079475032921801819}
-  Player: {fileID: 0}
+  Player: {fileID: 6978445252989900739}
   Cam: {fileID: 2760381820294819095}
+--- !u!114 &1913828546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2760381820294819092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &6619983076141587348
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,7 +480,7 @@ Transform:
   m_Children:
   - {fileID: 6081535778643851839}
   m_Father: {fileID: 2760381819199848765}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6978445252989900739
 GameObject:
@@ -520,7 +554,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2760381819199848765}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7449418612150113471
 GameObject:
