@@ -11,6 +11,8 @@ public class Bullet : MonoBehaviour
     private bool alreadyHit;
     private List<GameObject> ignoreCollisionsWith;
 
+    public ParticleSystem hitEffect, hitEffectEnemy;
+
     void Awake()
     {
         Destroy(gameObject, 10f); // if they somehow survive for 10 seconds kill them
@@ -33,11 +35,23 @@ public class Bullet : MonoBehaviour
         if (!alreadyHit && !ignoreCollisionsWith.Contains(other.gameObject)) {
             alreadyHit = true;
             Character hitCharacter = other.collider.GetComponent<Character>();
+            ContactPoint contactPoint = other.GetContact(0);
             if (hitCharacter != null)
             {
+                hitEffectEnemy.transform.position = contactPoint.point;
+                hitEffectEnemy.transform.forward = contactPoint.normal;
+                hitEffectEnemy.Emit(5);
                 hitCharacter.TakeDamage(bulletDamage);
+                Debug.Log("hit enemy");
+            } else
+            {
+                hitEffect.transform.position = contactPoint.point;
+                hitEffect.transform.forward = contactPoint.normal;
+                hitEffect.Emit(10);
+                SoundManager.PlaySound(SoundManager.Sound.bulletimpact, transform.position);
+                Debug.Log("hit non player object");
             }
-            Destroy(gameObject);
+            Destroy(gameObject, 10f);
         }
 	}
 }

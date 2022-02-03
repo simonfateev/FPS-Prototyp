@@ -18,6 +18,7 @@ public class Gun : MonoBehaviour, IInteractable
     public bool shooting;
     public bool readyToShoot;
     public bool reloading;
+    public bool hasInfiniteAmmo;
 
     [Header("References")]
     public Transform attackPoint;
@@ -100,6 +101,7 @@ public class Gun : MonoBehaviour, IInteractable
                 hitEffect.transform.position = rayHit.point;
                 hitEffect.transform.forward = rayHit.normal;
                 hitEffect.Emit(5);
+                Debug.Log("bullet impact");
             }
         }
 
