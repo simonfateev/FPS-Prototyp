@@ -5,8 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class AmmoPickup : MonoBehaviour, IPickupable
 {
-    [SerializeField] private GunType ammoTypeToGive;
-    [SerializeField] private int amountOfAmmo;
+    public GunType ammoTypeToGive;
+    public int amountOfAmmo;
 
     private bool hasBeenPickedUp = false;
 

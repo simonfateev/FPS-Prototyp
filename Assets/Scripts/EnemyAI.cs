@@ -61,7 +61,6 @@ public class EnemyAI : Character
         bool rayHit = Physics.Raycast(raycastPlayerFrom.position, playerDirectionFromEnemy, out hit, distanceToStartChasingAt);
         if (rayHit) {
             isPlayerRaycastable = hit.transform == player.transform;
-            Debug.Log(hit.transform);
 		}
 
         bool shouldChasePlayer = (playerNearby && isPlayerRaycastable) || (isAlreadyChasingPlayer && playerNearby);
@@ -123,7 +122,12 @@ public class EnemyAI : Character
 	public override void OnDeath()
 	{
         bodySystem.GoRagdoll();
+
         Instantiate(startingGunPrefab, gunAttachPoint.position, Quaternion.identity);
+        AmmoPickup ammoBox = Instantiate(Resources.Load("Prefabs/AmmoCube") as GameObject, gunAttachPoint.position, Quaternion.identity).GetComponent<AmmoPickup>();
+        ammoBox.ammoTypeToGive = enemyGun.gunType;
+        ammoBox.amountOfAmmo = (int)Random.Range(10f, 50f);
+
         Destroy(gameObject);
     }
 }
