@@ -7,19 +7,29 @@ public class EnemyAI : Character
     [Header("Enemy")]
     public NavMeshAgent agent;
 
-    public Transform player;
+    private Transform player;
 
     public Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
-
  
     public float timeBetweenAttacks;
     bool alreadyAttacked;
 
-  
-    public float sightRange;
-    public bool playerInSightRange;
+    public float distanceToStartChasingAt;
+    public float maximumShootingAngle;
+
+    public GameObject startingGunPrefab;
+    private Transform gunAttachPoint;
+    private Gun enemyGun;
+
+    [Header("For debugging")]
+    [SerializeField]
+    private bool isAlreadyChasingPlayer;
+    [SerializeField]
+    private bool playerNearby;
+
+    private Transform raycastPlayerFrom;
 
     public override BodySystem bodySystem { get; set; }
 
@@ -27,17 +37,56 @@ public class EnemyAI : Character
     {
         player = GameObject.Find("PlayerPrefab").transform;
         agent = GetComponent<NavMeshAgent>();
+        isAlreadyChasingPlayer = false;
+        raycastPlayerFrom = transform.Find("RaycastPlayerFrom");
+        gunAttachPoint = transform.Find("GunAttachPoint");
+
+        enemyGun = Instantiate(startingGunPrefab, gunAttachPoint).GetComponent<Gun>();
+        enemyGun.BecomeEquipped();
     }
 
     private void Update()
     {
-        
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange);
-       
+        agent.speed = GetCurrentMovementSpeed();
 
-        if (!playerInSightRange) Patroling();
-        if (playerInSightRange) ChasePlayer();
-        
+        Vector3 playerPosition = player.transform.position + new Vector3(0, 1, 0);
+
+        // Is player near us? (Through walls etc)
+        playerNearby = (raycastPlayerFrom.position - playerPosition).magnitude < distanceToStartChasingAt;
+        Vector3 playerDirectionFromEnemy = playerPosition - raycastPlayerFrom.position;
+
+        // Do we have a physical sightline to the player?
+        bool isPlayerRaycastable = false;
+        RaycastHit hit;
+        bool rayHit = Physics.Raycast(raycastPlayerFrom.position, playerDirectionFromEnemy, out hit, distanceToStartChasingAt);
+        if (rayHit) {
+            isPlayerRaycastable = hit.transform == player.transform;
+            Debug.Log(hit.transform);
+		}
+
+        bool shouldChasePlayer = (playerNearby && isPlayerRaycastable) || (isAlreadyChasingPlayer && playerNearby);
+
+        if (shouldChasePlayer) {
+            agent.SetDestination(player.position);
+            isAlreadyChasingPlayer = true;
+
+            // tldr get direction to player and rotate towards it
+            Vector3 directionToLook = playerDirectionFromEnemy;
+            directionToLook.y = 0; // don't rotate 'vertically'
+            Quaternion rotation = Quaternion.LookRotation(directionToLook);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, agent.angularSpeed * Time.deltaTime);
+
+            // tldr calculate angle to player and shoot if he's roughly in front of our vision
+            float angleBetweenEnemyForwardAndPlayer = Vector3.Angle(playerDirectionFromEnemy, transform.forward);
+            if (isPlayerRaycastable && angleBetweenEnemyForwardAndPlayer < maximumShootingAngle)
+            {
+                Vector3 gunShootDirection = playerPosition - enemyGun.attackPoint.transform.position;
+                enemyGun.Shoot(gunShootDirection, false);
+            }
+        } else {
+            Patroling();
+            isAlreadyChasingPlayer = false;
+		}
     }
 
     private void Patroling()
@@ -63,11 +112,6 @@ public class EnemyAI : Character
 
         if (Physics.Raycast(walkPoint, -transform.up, 2f))
             walkPointSet = true;
-    }
-
-    private void ChasePlayer()
-    {
-        agent.SetDestination(player.position);
     }
 
 	public override void TakeDamage(float damage)

@@ -45,32 +45,37 @@ public class Gun : MonoBehaviour, IInteractable
         bulletPrefab = Resources.Load("Prefabs/Bullet") as GameObject;
     }
 
-    public void SetAttachedToPlayer(PlayerScript playerScript)
+    public void BecomeEquipped()
     {
         rb.isKinematic = true;
     }
 
     public void Shoot(Vector3 directionToShoot, bool isRaycastShoot)
     {
-        readyToShoot = false;
-        Invoke("ResetShot", timeBetweenShots);
+        if (readyToShoot) {
+            readyToShoot = false;
+            Invoke("ResetShot", timeBetweenShots);
 
-        //Spread
-        float x = Random.Range(-spread, spread);
-        float y = Random.Range(-spread, spread);
+            //Spread
+            float x = Random.Range(-spread, spread);
+            float y = Random.Range(-spread, spread);
 
-        //Calculate Direction with Spread
-        Vector3 finalDirection = directionToShoot + new Vector3(Random.Range(-spread, spread), Random.Range(-spread, spread), Random.Range(-spread, spread));
+            //Calculate Direction with Spread
+            Vector3 finalDirection = directionToShoot + new Vector3(Random.Range(-spread, spread), Random.Range(-spread, spread), Random.Range(-spread, spread));
 
-        gunsound.Play();
+            gunsound.Play();
 
-        if (isRaycastShoot) {
-            RaycastShoot(finalDirection);
-		} else {
-            ProjectileShoot(finalDirection);
-		}
+            if (isRaycastShoot)
+            {
+                RaycastShoot(finalDirection);
+            }
+            else
+            {
+                ProjectileShoot(finalDirection);
+            }
 
-        Instantiate(muzzleFlash, attackPoint);
+            Instantiate(muzzleFlash, attackPoint);
+        }
     }
 
     private void RaycastShoot(Vector3 directionToShoot) {

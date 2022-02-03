@@ -106,7 +106,7 @@ public class PlayerScript : Character
             if (shooting) {
                 bool hasAmmo = ammoStorage[gun.gunType] > 0;
 
-                if (gun.readyToShoot && hasAmmo) {
+                if (hasAmmo) {
                     gun.Shoot(Camera.main.transform.forward, false);
 
                     ammoStorage[gun.gunType]--;
@@ -157,7 +157,7 @@ public class PlayerScript : Character
         GameObject newGun = Instantiate(gunScriptToEquip.selfPrefab, attachPoints[side], false);
         Gun newGunScript = newGun.GetComponent<Gun>();
 
-        newGunScript.SetAttachedToPlayer(this);
+        newGunScript.BecomeEquipped();
         playerGuns[side] = newGunScript;
     }
 
