@@ -28,6 +28,7 @@ public static class SoundManager {
     {
         soundTimerDictionary = new Dictionary<Sound, float>();
         soundTimerDictionary[Sound.footstep1] = 0f;
+        soundTimerDictionary[Sound.noammo] = 0f;
     }
 
     public static void PlaySound(Sound sound, Vector3 position)
@@ -63,7 +64,25 @@ public static class SoundManager {
                 {
                     return false;
                 }
-               //break;
+            case Sound.noammo:
+                if (soundTimerDictionary.ContainsKey(sound))
+                {
+                    float lastTimePlayed = soundTimerDictionary[sound];
+                    float noAmmoSoundMax = 0.15f;
+                    if (lastTimePlayed + noAmmoSoundMax < Time.time)
+                    {
+                        soundTimerDictionary[sound] = Time.time;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
         }
 
     }

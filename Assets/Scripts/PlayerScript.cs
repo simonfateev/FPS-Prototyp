@@ -35,6 +35,9 @@ public class PlayerScript : Character
 
     public GameObject deathScreen;
 
+    public GameObject onHitUI;
+    Animator hitEffectAnim;
+
 	void Awake()
 	{
         // Scuffed singleton
@@ -43,6 +46,8 @@ public class PlayerScript : Character
 
         Time.timeScale = 1.0f;
         deathScreen.SetActive(false);
+
+        hitEffectAnim = onHitUI.GetComponent<Animator>();
     }
 
 	void Start()
@@ -113,7 +118,11 @@ public class PlayerScript : Character
                         ammoStorage[gun.gunType]--;
                     }
                 }
-			}
+                else
+                {
+                    SoundManager.PlaySound(SoundManager.Sound.noammo, transform.position);
+                }
+            }
         }
     }
 
@@ -178,6 +187,12 @@ public class PlayerScript : Character
             pickupable.OnPickUp(this);
 		}
 	}
+
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+        hitEffectAnim.Play("onHit");
+    }
 
     public override void OnDeath()
     {

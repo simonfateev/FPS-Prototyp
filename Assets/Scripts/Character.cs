@@ -65,7 +65,7 @@ public abstract class Character : MonoBehaviour
 
     public virtual void TakeDamage(float damage) {
         currentHealth -= damage;
-        if (currentHealth < 0) {
+        if (currentHealth <= 0) {
             OnDeath();
 		}
         Debug.Log(gameObject.ToString() + " took " + damage + " damage");

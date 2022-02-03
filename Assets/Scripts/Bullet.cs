@@ -46,8 +46,10 @@ public class Bullet : MonoBehaviour
                 hitEffectEnemy.transform.position = contactPoint.point;
                 hitEffectEnemy.transform.forward = contactPoint.normal;
                 hitEffectEnemy.Emit(5);
+
                 hitCharacter.TakeDamage(bulletDamage);
                 SoundManager.PlaySound(SoundManager.Sound.enemyhit, transform.position);
+
                 Debug.Log("hit enemy");
             } else
             {
