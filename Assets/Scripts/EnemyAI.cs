@@ -123,6 +123,7 @@ public class EnemyAI : Character
 	public override void OnDeath()
 	{
         bodySystem.GoRagdoll();
+        Instantiate(startingGunPrefab, gunAttachPoint.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

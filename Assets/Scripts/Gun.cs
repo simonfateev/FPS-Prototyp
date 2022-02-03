@@ -50,7 +50,8 @@ public class Gun : MonoBehaviour, IInteractable
         rb.isKinematic = true;
     }
 
-    public void Shoot(Vector3 directionToShoot, bool isRaycastShoot)
+    // Returns whether it shot or not
+    public bool Shoot(Vector3 directionToShoot, bool isRaycastShoot)
     {
         if (readyToShoot) {
             readyToShoot = false;
@@ -75,7 +76,11 @@ public class Gun : MonoBehaviour, IInteractable
             }
 
             Instantiate(muzzleFlash, attackPoint);
-        }
+
+            return true;
+        } else {
+            return false;
+		}
     }
 
     private void RaycastShoot(Vector3 directionToShoot) {

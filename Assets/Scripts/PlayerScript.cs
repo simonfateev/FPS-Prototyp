@@ -107,9 +107,11 @@ public class PlayerScript : Character
                 bool hasAmmo = ammoStorage[gun.gunType] > 0;
 
                 if (hasAmmo) {
-                    gun.Shoot(Camera.main.transform.forward, false);
+                    bool didGunShoot = gun.Shoot(Camera.main.transform.forward, false);
 
-                    ammoStorage[gun.gunType]--;
+                    if (didGunShoot) {
+                        ammoStorage[gun.gunType]--;
+                    }
                 }
 			}
         }
