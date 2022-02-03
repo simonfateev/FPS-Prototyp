@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetAxis("Vertical") != 0) IsMoving = true;
         else IsMoving = false;
 
-        if (IsMoving && playerIsGrounded) SoundManager.PlaySound(SoundManager.Sound.footstep1);
+        if (IsMoving && playerIsGrounded) SoundManager.PlaySound(SoundManager.Sound.footstep1, transform.position);
     }
 
     void UpdateMouseLook()

@@ -34,19 +34,7 @@ public static class SoundManager {
     {
         if (CanPlaySound(sound))
         {
-            GameObject soundGameObject = new GameObject("Sound");
-            soundGameObject.transform.position = position;
-            AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
-            audioSource.clip = GetAudioClip(sound);
-            audioSource.Play();
-        }
-    }
-    public static void PlaySound(Sound sound)
-    {
-        if (CanPlaySound(sound)) { 
-            GameObject soundGameObject = new GameObject("Sound");
-            AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
-            audioSource.PlayOneShot(GetAudioClip(sound));
+            AudioSource.PlayClipAtPoint(GetAudioClip(sound), position);
         }
     }
 
