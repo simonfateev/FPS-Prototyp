@@ -74,7 +74,7 @@ public class PlayerScript : Character
             AttemptPickup(Side.RIGHT);
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && bodySystem.BodyHasPassive(Passives.DUALWIELD))
         {
             AttemptPickup(Side.LEFT);
         }
@@ -201,5 +201,13 @@ public class PlayerScript : Character
         Debug.Log("player ded");
         deathScreen.SetActive(true);
         Time.timeScale = 0.0f;
+	}
+
+	public override void OnBodyPartSwap()
+	{
+		base.OnBodyPartSwap();
+        if (playerGuns[Side.LEFT] != null && !bodySystem.BodyHasPassive(Passives.DUALWIELD)) {
+            DropGun(Side.LEFT);
+		}
 	}
 }

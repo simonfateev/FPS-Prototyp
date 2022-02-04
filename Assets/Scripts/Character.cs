@@ -42,8 +42,7 @@ public abstract class Character : MonoBehaviour
         Debug.Log(gameObject.ToString() + " healed " + health);
     }
 
-    // BodySystem calls this when you swap a body part to validate current health
-    public void RecalculateCurrentHealth() {
+    private void RecalculateCurrentHealth() {
         if (currentHealth > GetCurrentMaxHealth()) {
             currentHealth = GetCurrentMaxHealth();
 		}
@@ -69,6 +68,11 @@ public abstract class Character : MonoBehaviour
             OnDeath();
 		}
         Debug.Log(gameObject.ToString() + " took " + damage + " damage");
+	}
+
+    // BodySystem calls this when you swap a body part to validate current health
+    public virtual void OnBodyPartSwap() {
+        RecalculateCurrentHealth();
 	}
 
     public abstract void OnDeath();

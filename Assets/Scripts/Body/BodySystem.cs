@@ -61,7 +61,7 @@ public class BodySystem : MonoBehaviour
 
         // Equip part
         EquipBodyPart(bpToEquip.GetSelfPrefab());
-        attachedToChar.RecalculateCurrentHealth();
+        attachedToChar.OnBodyPartSwap();
     }
 
     public float GetModifierValue(Modifier mod) {
@@ -89,5 +89,16 @@ public class BodySystem : MonoBehaviour
             BodyPart currentBP = bodyParts[bpt];
             Instantiate(currentBP.GetSelfPrefab(), bodyAttachPoints[bpt].position, Quaternion.identity);
 		}
+    }
+
+    public bool BodyHasPassive(Passives passive) {
+        foreach (BodyPartType bpt in Enum.GetValues(typeof(BodyPartType)))
+        {
+            BodyPart currentBP = bodyParts[bpt];
+            if (currentBP.passiveList.Contains(passive)) {
+                return true;
+			}
+        }
+        return false;
     }
 }

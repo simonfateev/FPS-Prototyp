@@ -15,6 +15,9 @@ public class BodyPart : MonoBehaviour, IInteractable
 	private List<Stat> statList = new List<Stat>(); // only for starting, don't use directly
 	public Dictionary<Modifier, float> modifiers = new Dictionary<Modifier, float>();
 
+	[SerializeField]
+	public List<Passives> passiveList = new List<Passives>();
+
 	public BodyPartType type;
 	public ISpecialAbility specialAbility;
 
