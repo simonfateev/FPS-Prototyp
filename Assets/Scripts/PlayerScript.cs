@@ -34,9 +34,11 @@ public class PlayerScript : Character
     public override BodySystem bodySystem { get; set; }
 
     public GameObject deathScreen;
-
     public GameObject onHitUI;
+    public GameObject crosshair;
     Animator hitEffectAnim;
+
+    float test;
 
 	void Awake()
 	{
@@ -82,6 +84,14 @@ public class PlayerScript : Character
         if (Input.GetKeyDown(KeyCode.F)) {
             bodySystem.UseAbilityOnBodyPart(BodyPartType.HEAD);
 		}
+
+        if (bodySystem.BodyHasPassive(Passives.CROSSHAIR))
+        {
+            crosshair.SetActive(true);
+        } else
+        {
+            crosshair.SetActive(false);
+        }
 
         MyInput();
     }

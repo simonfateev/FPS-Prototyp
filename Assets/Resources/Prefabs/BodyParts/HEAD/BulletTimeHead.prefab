@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6623550274559478037}
   - component: {fileID: 5941669219773359441}
   - component: {fileID: 2586568005701668272}
+  - component: {fileID: -2196638200294772910}
   m_Layer: 0
   m_Name: BulletTimeHead
   m_TagString: Untagged
@@ -127,10 +128,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statList: []
+  passiveList: 
   type: 0
   rb: {fileID: 0}
   parentSystem: {fileID: 0}
   selfPrefabPath: Prefabs/BodyParts/HEAD/BulletTimeHead
+--- !u!114 &-2196638200294772910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7983553251662211030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faeecd4570bb15a4db3ba83825d7272c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 10
+  abilityLength: 0
 --- !u!1001 &8825601937549343797
 PrefabInstance:
   m_ObjectHideFlags: 0
