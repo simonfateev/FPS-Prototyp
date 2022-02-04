@@ -130,6 +130,7 @@ MonoBehaviour:
   statList:
   - modifier: 0
     value: 0
+  passiveList: 00000000
   type: 1
   rb: {fileID: 0}
   parentSystem: {fileID: 0}

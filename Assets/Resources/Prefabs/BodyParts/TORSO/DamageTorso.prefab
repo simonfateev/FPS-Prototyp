@@ -14470,7 +14470,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statList:
   - modifier: 0
-    value: 200
+    value: 0
+  passiveList: 
   type: 1
   rb: {fileID: 0}
   parentSystem: {fileID: 0}
