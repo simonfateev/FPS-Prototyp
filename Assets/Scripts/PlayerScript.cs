@@ -79,6 +79,10 @@ public class PlayerScript : Character
             AttemptPickup(Side.LEFT);
         }
 
+        if (Input.GetKeyDown(KeyCode.F)) {
+            bodySystem.UseAbilityOnBodyPart(BodyPartType.HEAD);
+		}
+
         MyInput();
     }
 
