@@ -43,7 +43,7 @@ public class Gun : MonoBehaviour, IInteractable
         rb = GetComponent<Rigidbody>();
         selfPrefab = Resources.Load(prefabName) as GameObject;
         gunsound = GetComponent<AudioSource>();
-        bulletPrefab = Resources.Load("Prefabs/Bullet") as GameObject;
+        bulletPrefab = Resources.Load("Prefabs/Effects/Bullet") as GameObject;
     }
 
     public void BecomeEquipped()
