@@ -36,6 +36,7 @@ public class Bullet : MonoBehaviour
         if (!alreadyHit && !ignoreCollisionsWith.Contains(other.gameObject)) {
             alreadyHit = true;
             bulletModel.SetActive(false);
+            rb.collisionDetectionMode = CollisionDetectionMode.Discrete; // to stop complaining
             rb.isKinematic = true;
             rb.velocity = Vector3.zero;
 
