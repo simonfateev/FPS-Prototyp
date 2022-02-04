@@ -30,6 +30,7 @@ public class EnemyAI : Character
     private bool playerNearby;
 
     private Transform raycastPlayerFrom;
+    public WinCondition winCondition;
 
     public override BodySystem bodySystem { get; set; }
 
@@ -43,6 +44,7 @@ public class EnemyAI : Character
 
         enemyGun = Instantiate(startingGunPrefab, gunAttachPoint).GetComponent<Gun>();
         enemyGun.BecomeEquipped();
+        winCondition.enemyHasAppeared();
     }
 
     private void Update()
@@ -122,6 +124,7 @@ public class EnemyAI : Character
 	public override void OnDeath()
 	{
         bodySystem.GoRagdoll();
+        winCondition.enemyHasDied();
 
         Instantiate(startingGunPrefab, gunAttachPoint.position, Quaternion.identity);
         AmmoPickup ammoBox = Instantiate(Resources.Load("Prefabs/Objects/AmmoCube") as GameObject, gunAttachPoint.position, Quaternion.identity).GetComponent<AmmoPickup>();

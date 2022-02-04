@@ -1126,7 +1126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 100
   timeBetweenShots: 0.08
-  spread: 0.02
+  spread: 0.05
   range: 100
   bulletsPerTap: 1
   allowButtonHold: 1
