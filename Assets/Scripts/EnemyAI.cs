@@ -124,7 +124,7 @@ public class EnemyAI : Character
         bodySystem.GoRagdoll();
 
         Instantiate(startingGunPrefab, gunAttachPoint.position, Quaternion.identity);
-        AmmoPickup ammoBox = Instantiate(Resources.Load("Prefabs/AmmoCube") as GameObject, gunAttachPoint.position, Quaternion.identity).GetComponent<AmmoPickup>();
+        AmmoPickup ammoBox = Instantiate(Resources.Load("Prefabs/Objects/AmmoCube") as GameObject, gunAttachPoint.position, Quaternion.identity).GetComponent<AmmoPickup>();
         ammoBox.ammoTypeToGive = enemyGun.gunType;
         ammoBox.amountOfAmmo = (int)Random.Range(10f, 50f);
 
