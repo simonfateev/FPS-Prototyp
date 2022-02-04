@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour
     private float bulletDamage;
     private bool alreadyHit;
     private List<GameObject> ignoreCollisionsWith;
+    private bool playerBullet;
 
     public GameObject bulletModel;
     public ParticleSystem hitEffect, hitEffectEnemy;
@@ -23,9 +24,10 @@ public class Bullet : MonoBehaviour
     }
 
     // Should be called when bullet is instatiated
-    public void Setup(Vector3 direction, float bulletDamage, List<GameObject> ignoreCollisionsWith) {
+    public void Setup(Vector3 direction, float bulletDamage, List<GameObject> ignoreCollisionsWith, bool playerBullet) {
         this.bulletDamage = bulletDamage;
         this.ignoreCollisionsWith = ignoreCollisionsWith;
+        this.playerBullet = playerBullet;
 
         rb.AddForce(direction.normalized * bulletSpeed * 0.1f, ForceMode.Impulse);
         transform.rotation = Quaternion.LookRotation(direction);
@@ -44,6 +46,9 @@ public class Bullet : MonoBehaviour
             ContactPoint contactPoint = other.GetContact(0);
             if (hitCharacter != null)
             {
+                if (hitCharacter.GetType() == typeof(EnemyAI) && !playerBullet) {
+                    return; // enemy shot enemy, so just return;
+                }
                 hitEffectEnemy.transform.position = contactPoint.point;
                 hitEffectEnemy.transform.forward = contactPoint.normal;
                 hitEffectEnemy.Emit(5);

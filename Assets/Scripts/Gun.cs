@@ -52,7 +52,7 @@ public class Gun : MonoBehaviour, IInteractable
     }
 
     // Returns whether it shot or not
-    public bool Shoot(Vector3 directionToShoot, bool isRaycastShoot, float spreadModifier)
+    public bool Shoot(Vector3 directionToShoot, bool isRaycastShoot, float spreadModifier, bool playerBullet)
     {
         if (readyToShoot) {
             readyToShoot = false;
@@ -72,7 +72,7 @@ public class Gun : MonoBehaviour, IInteractable
             }
             else
             {
-                ProjectileShoot(finalDirection);
+                ProjectileShoot(finalDirection, playerBullet);
             }
 
             Instantiate(muzzleFlash, attackPoint);
@@ -115,11 +115,11 @@ public class Gun : MonoBehaviour, IInteractable
         tracer.transform.position = rayHit.point;
     }
 
-    private void ProjectileShoot(Vector3 directionToShoot)
+    private void ProjectileShoot(Vector3 directionToShoot, bool playerBullet)
     {
         GameObject newBullet = Instantiate(bulletPrefab, attackPoint.position, Quaternion.identity);
         Bullet bullet = newBullet.GetComponent<Bullet>();
-        bullet.Setup(directionToShoot, damage, new List<GameObject>() { gameObject });
+        bullet.Setup(directionToShoot, damage, new List<GameObject>() { gameObject }, playerBullet);
     }
 
     private void ResetShot()
