@@ -52,18 +52,17 @@ public class Gun : MonoBehaviour, IInteractable
     }
 
     // Returns whether it shot or not
-    public bool Shoot(Vector3 directionToShoot, bool isRaycastShoot)
+    public bool Shoot(Vector3 directionToShoot, bool isRaycastShoot, float spreadModifier)
     {
         if (readyToShoot) {
             readyToShoot = false;
             Invoke("ResetShot", timeBetweenShots);
 
             //Spread
-            float x = Random.Range(-spread, spread);
-            float y = Random.Range(-spread, spread);
+            float finalSpread = Mathf.Max(0, spread + spreadModifier);
 
             //Calculate Direction with Spread
-            Vector3 finalDirection = directionToShoot + new Vector3(Random.Range(-spread, spread), Random.Range(-spread, spread), Random.Range(-spread, spread));
+            Vector3 finalDirection = directionToShoot + new Vector3(Random.Range(-finalSpread, finalSpread), Random.Range(-finalSpread, finalSpread), Random.Range(-finalSpread, finalSpread));
 
             gunsound.Play();
 

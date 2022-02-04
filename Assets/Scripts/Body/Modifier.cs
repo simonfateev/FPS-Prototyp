@@ -7,5 +7,6 @@ public enum Modifier
     HEALTH,
     MOVEMENTSPEED,
     JUMPHEIGHT,
-    GRAVITY
+    GRAVITY,
+    GUNSPREAD
 }

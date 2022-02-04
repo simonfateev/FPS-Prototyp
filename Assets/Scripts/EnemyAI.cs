@@ -80,7 +80,7 @@ public class EnemyAI : Character
             if (isPlayerRaycastable && angleBetweenEnemyForwardAndPlayer < maximumShootingAngle)
             {
                 Vector3 gunShootDirection = playerPosition - enemyGun.attackPoint.transform.position;
-                enemyGun.Shoot(gunShootDirection, false);
+                enemyGun.Shoot(gunShootDirection, false, bodySystem.GetModifierValue(Modifier.GUNSPREAD));
             }
         } else {
             Patrolling();
