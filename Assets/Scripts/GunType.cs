@@ -3,5 +3,6 @@ public enum GunType
     PISTOL,
     RIFLE,
     SHOTGUN,
-    SNIPER
+    SNIPER,
+    SMG
 }

@@ -62,6 +62,7 @@ public class PlayerScript : Character
         ammoStorage[GunType.RIFLE] = 30;
         ammoStorage[GunType.SHOTGUN] = 8;
         ammoStorage[GunType.SNIPER] = 10;
+        ammoStorage[GunType.SMG] = 32;
 
         deathScreen.SetActive(false);
     }
