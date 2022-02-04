@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statList: []
+  passiveList: 01000000
   type: 0
   rb: {fileID: 0}
   parentSystem: {fileID: 0}

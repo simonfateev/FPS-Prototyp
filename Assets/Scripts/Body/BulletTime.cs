@@ -4,21 +4,37 @@ using UnityEngine;
 
 public class BulletTime : MonoBehaviour, ISpecialAbility
 {
-	public float cooldown = 10f;
-	private float lastUsed = 0f;
+	public float cooldown;
+	public float duration;
 
-	public void UseAbility(PlayerScript player)
+	private bool abilityActive;
+	private bool cdActive;
+
+
+    public void UseAbility(PlayerScript player)
 	{
-		// activate bullet time if cooldown has passed (check lastUsed against currnet time)
+		if (!abilityActive && !cdActive)
+		{
+			StartCoroutine("Duration");
+			StartCoroutine("Cooldown");
+		}
 	}
 
-	private void Update()
-	{
-		// check if bullet time should still be going
-		// if not return time to normal
-	}
+	public IEnumerator Cooldown()
+    {
+		cdActive = true;
+		yield return new WaitForSeconds(cooldown);
+		cdActive = false;
+		Debug.Log("ability active now");
+    }
 
-	private void ContinueBullet() {
+	public IEnumerator Duration()
+    {
+		abilityActive = true;
 		Time.timeScale = 0.5f;
-	}
+		yield return new WaitForSeconds(duration);
+		abilityActive = false;
+		Time.timeScale = 1.0f;
+		Debug.Log("duration expired");
+    }
 }
