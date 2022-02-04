@@ -131,6 +131,8 @@ MonoBehaviour:
   shooting: 0
   cam: {fileID: 2760381820294819095}
   deathScreen: {fileID: 0}
+  onHitUI: {fileID: 0}
+  crosshair: {fileID: 0}
 --- !u!114 &4702226583248345620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,7 +161,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: be49b29d49ad0ef4f98c10a15dd51713, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
