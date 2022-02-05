@@ -131,7 +131,8 @@ MonoBehaviour:
   - modifier: 1
     value: 2
   - modifier: 2
-    value: 3
+    value: 4
+  passiveList: 
   type: 2
   rb: {fileID: 0}
   parentSystem: {fileID: 0}

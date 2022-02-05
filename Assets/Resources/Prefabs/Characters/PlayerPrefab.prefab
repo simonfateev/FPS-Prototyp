@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ef6fc0c2159a146a3493c67703bbcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultMaxHealth: 5000
+  defaultMaxHealth: 100
   defaultMovementSpeed: 10
   defaultGravity: -13
   defaultJump: 1
