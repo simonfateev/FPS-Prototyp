@@ -6,6 +6,7 @@ using TMPro;
 public class WinCondition : MonoBehaviour
 {
     public GameObject winConditionUI;
+    public GameObject music;
     public TextMeshProUGUI timerText;
     private int enemiesLeft = 0;
     private int minutes;
@@ -21,7 +22,6 @@ public class WinCondition : MonoBehaviour
     private void Update()
     {
         timeTaken = Time.time;
-        Debug.Log(timeTaken);
     }
 
     public void enemyHasDied()
@@ -29,10 +29,11 @@ public class WinCondition : MonoBehaviour
         enemiesLeft--;
         print(enemiesLeft);
 
-        if (enemiesLeft < 0)
+        if (enemiesLeft == 0)
         {
             TimeCalc();
             timerText.SetText("You took: " + minutes + "m " + seconds + "s");
+            Destroy(music);
             winConditionUI.SetActive(true);
             SoundManager.PlaySound(SoundManager.Sound.gamewin, transform.position);
             Time.timeScale = 0f;
@@ -49,6 +50,6 @@ public class WinCondition : MonoBehaviour
     public void TimeCalc()
     {
         minutes = Mathf.RoundToInt(timeTaken / 60);
-        seconds = Mathf.RoundToInt(timeTaken - (minutes * 60));
+        seconds = Mathf.Abs(Mathf.RoundToInt(timeTaken - (minutes * 60)));
     }
 }
