@@ -19,7 +19,8 @@ public static class SoundManager {
         playerfall,
         playerhit,
         playerlongfall,
-        weaponphysics
+        weaponphysics,
+        gamewin,
     }
 
     private static Dictionary<Sound, float> soundTimerDictionary;
