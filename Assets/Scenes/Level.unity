@@ -14770,6 +14770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   winConditionUI: {fileID: 1007489393}
+  music: {fileID: 1500044249}
   timerText: {fileID: 1202599060}
 --- !u!4 &191505415
 Transform:
@@ -29847,7 +29848,7 @@ PrefabInstance:
       objectReference: {fileID: 937263708}
     - target: {fileID: 2760381819199848766, guid: 4db6467f365558045ae9edc42e52b9f3, type: 3}
       propertyPath: defaultMaxHealth
-      value: 100
+      value: 100000100
       objectReference: {fileID: 0}
     - target: {fileID: 2760381819199848766, guid: 4db6467f365558045ae9edc42e52b9f3, type: 3}
       propertyPath: defaultMovementSpeed
@@ -71060,7 +71061,7 @@ LightingSettings:
   m_PrefabAsset: {fileID: 0}
   m_Name: New Lighting Settings
   serializedVersion: 3
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_EnableBakedLightmaps: 1
   m_EnableRealtimeLightmaps: 0
   m_RealtimeEnvironmentLighting: 1

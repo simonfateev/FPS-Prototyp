@@ -19,11 +19,6 @@ public class WinCondition : MonoBehaviour
         timerText.GetComponent<TextMeshPro>();
     }
 
-    private void Update()
-    {
-        timeTaken = Time.time;
-    }
-
     public void enemyHasDied()
     {
         enemiesLeft--;
@@ -49,6 +44,7 @@ public class WinCondition : MonoBehaviour
 
     public void TimeCalc()
     {
+        timeTaken = Time.time;
         minutes = Mathf.RoundToInt(timeTaken / 60);
         seconds = Mathf.Abs(Mathf.RoundToInt(timeTaken - (minutes * 60)));
     }
