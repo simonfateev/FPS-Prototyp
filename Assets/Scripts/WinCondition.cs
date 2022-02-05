@@ -12,11 +12,18 @@ public class WinCondition : MonoBehaviour
     private int minutes;
     private int seconds;
     private float timeTaken;
+    private AudioSource winSound;
 
     private void Awake()
     {
         winConditionUI.SetActive(false);
         timerText.GetComponent<TextMeshPro>();
+        winSound = GetComponent<AudioSource>(); 
+    }
+
+    private void Update()
+    {
+        timeTaken = Time.time;
     }
 
     public void enemyHasDied()
@@ -30,7 +37,7 @@ public class WinCondition : MonoBehaviour
             timerText.SetText("You took: " + minutes + "m " + seconds + "s");
             Destroy(music);
             winConditionUI.SetActive(true);
-            SoundManager.PlaySound(SoundManager.Sound.gamewin, transform.position);
+            winSound.Play();
             Time.timeScale = 0f;
             Debug.Log("Fuck you!");
         }
