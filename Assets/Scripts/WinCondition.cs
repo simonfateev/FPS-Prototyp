@@ -34,6 +34,8 @@ public class WinCondition : MonoBehaviour
             TimeCalc();
             timerText.SetText("You took: " + minutes + "m " + seconds + "s");
             winConditionUI.SetActive(true);
+            SoundManager.PlaySound(SoundManager.Sound.gamewin, transform.position);
+            Time.timeScale = 0f;
             Debug.Log("Fuck you!");
         }
     }
@@ -48,6 +50,5 @@ public class WinCondition : MonoBehaviour
     {
         minutes = Mathf.RoundToInt(timeTaken / 60);
         seconds = Mathf.RoundToInt(timeTaken - (minutes * 60));
-        SoundManager.PlaySound(SoundManager.Sound.gamewin, transform.position);
     }
 }
